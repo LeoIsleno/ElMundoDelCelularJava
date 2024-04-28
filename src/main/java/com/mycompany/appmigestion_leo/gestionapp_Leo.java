@@ -1,6 +1,5 @@
 package com.mycompany.appmigestion_leo;
 
-import igu.Main;
 import igu.Principal;
 
 
