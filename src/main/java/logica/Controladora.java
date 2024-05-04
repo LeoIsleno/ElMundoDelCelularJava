@@ -23,7 +23,23 @@ public class Controladora {
     }
 
     public void EliminarCel(int id_Cel) {
-    controlPersis.eliminarCelular(id_Cel);
+        controlPersis.eliminarCelular(id_Cel);
+    }
+
+    public Celulares traerCelularBuscado(int id_Cel) {
+        return controlPersis.traerCelularBuscado(id_Cel);
+    }
+
+    public void actualizarCelular(Celulares cel, String nombre, String marcaIndex, String almacenamientoIndex,
+            String ramIndex, String costo, String precio) {
+        cel.setNombreDisp(nombre);
+        cel.setMarca(marcaIndex);
+        cel.setAlmacenamiento(almacenamientoIndex);
+        cel.setRam(ramIndex);
+        cel.setCosto(costo);
+        cel.setPrecio(precio);
+        
+        controlPersis.modificarCelular(cel);
     }
 
 }

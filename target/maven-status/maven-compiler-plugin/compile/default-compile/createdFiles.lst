@@ -2,9 +2,7 @@ igu\RegistrarCelularForm$1.class
 igu\Principal$1.class
 logica\Celulares_.class
 igu\RegistrarCelularForm$6.class
-igu\EditarCelular$3.class
 logica\Usuarios.class
-igu\EditarCelular$2.class
 igu\Utilidades.class
 logica\Celulares.class
 igu\RegistrarCelularForm$3.class
@@ -15,14 +13,13 @@ Utilidades.class
 igu\RegistrarCelularForm$8.class
 persistencia\ControladoraPersistencia.class
 persistencia\exceptions\IllegalOrphanException.class
+igu\RegistrarCelularForm$10.class
 com\mycompany\appmigestion_leo\gestionapp_Leo.class
 igu\RegistrarCelularForm$7.class
-igu\EditarCelular$4.class
-igu\EditarCelular.class
 igu\RegistrarCelularForm$2.class
 logica\Controladora.class
-igu\EditarCelular$1.class
 igu\Principal.class
 persistencia\CelularesJpaController.class
 persistencia\exceptions\NonexistentEntityException.class
+igu\RegistrarCelularForm$9.class
 igu\RegistrarCelularForm$4.class
