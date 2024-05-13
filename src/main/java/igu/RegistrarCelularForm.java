@@ -48,8 +48,6 @@ public class RegistrarCelularForm extends JInternalFrame {
         txt_costo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txt_precio = new javax.swing.JTextField();
-        btn_buscar = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         btn_guardar = new javax.swing.JButton();
         btn_limpiar = new javax.swing.JButton();
@@ -88,13 +86,6 @@ public class RegistrarCelularForm extends JInternalFrame {
 
         jLabel5.setText("Precio de venta ($)");
 
-        btn_buscar.setText("Buscar");
-        btn_buscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_buscarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -110,22 +101,19 @@ public class RegistrarCelularForm extends JInternalFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 98, Short.MAX_VALUE))
             .addComponent(comb_almacenamiento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(comb_ram, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
-                .addComponent(btn_buscar))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(btn_buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
@@ -148,17 +136,6 @@ public class RegistrarCelularForm extends JInternalFrame {
                 .addGap(4, 4, 4)
                 .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
-        );
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 9, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 376, Short.MAX_VALUE)
         );
 
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -270,15 +247,10 @@ public class RegistrarCelularForm extends JInternalFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -295,10 +267,6 @@ public class RegistrarCelularForm extends JInternalFrame {
 
     }//GEN-LAST:event_tabla_celMouseClicked
 
-    private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_buscarActionPerformed
-
     private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
         LimpiarCajaTexto();
     }//GEN-LAST:event_btn_limpiarActionPerformed
@@ -314,6 +282,7 @@ public class RegistrarCelularForm extends JInternalFrame {
         String almacenamientoIndex = (String) comb_almacenamiento.getSelectedItem();
         String marcaIndex = (String) comb_marca.getSelectedItem();
         String ramIndex = (String) comb_ram.getSelectedItem();
+        String estado = "Disponible";
 
         if (nombre.equals("") && costo.equals("")
                 != precio.equals("") && almacenamientoIndex.equals("-")
@@ -322,7 +291,7 @@ public class RegistrarCelularForm extends JInternalFrame {
             Utilidades.MostrarMensaje("No se pueden cargar celdas vacias", "Error", Alerta);
 
         } else {
-            control.guardar(nombre, marcaIndex, almacenamientoIndex, ramIndex, costo, precio);
+            control.registrarCelular(nombre, marcaIndex, almacenamientoIndex, ramIndex, costo, precio, estado);
             Utilidades.MostrarMensaje("Se guardo exitosamente", "Info", "Guardado");
 
             //Limpiamos las cajas de texto
@@ -352,7 +321,6 @@ public class RegistrarCelularForm extends JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Actualizar;
-    private javax.swing.JButton btn_buscar;
     private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton btn_editar;
     private javax.swing.JButton btn_eliminar;
@@ -367,7 +335,6 @@ public class RegistrarCelularForm extends JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -401,16 +368,17 @@ public class RegistrarCelularForm extends JInternalFrame {
         //Recorremos la lista y mostrar cada uno de los elementos en la tabla
         if (listaCelulares != null) {
             for (Celulares cel : listaCelulares) {
-                Object[] objCelulares = {
-                    cel.getId(),
-                    cel.getNombreDisp(),
-                    cel.getMarca(),
-                    cel.getAlmacenamiento(),
-                    cel.getRam(),
-                    cel.getPrecio()
-                };
-                //Las añadimos a la tabla
-                modeloTabla.addRow(objCelulares);
+                if (cel.getEstado().equals("Disponible")) {
+                    Object[] objCelulares = {
+                        cel.getId(),
+                        cel.getNombreDisp(),
+                        cel.getMarca(),
+                        cel.getAlmacenamiento(),
+                        cel.getRam(),
+                        cel.getPrecio(),};
+                    //Las añadimos a la tabla
+                    modeloTabla.addRow(objCelulares);
+                }
             }
         }
 

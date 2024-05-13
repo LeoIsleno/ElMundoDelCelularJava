@@ -10,7 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import logica.Celulares;
@@ -20,17 +19,11 @@ import persistencia.exceptions.NonexistentEntityException;
  *
  * @author Usuario
  */
-public class CelularesJpaController implements Serializable {
+public class CelularesJpaController1 implements Serializable {
 
-    public CelularesJpaController(EntityManagerFactory emf) {
+    public CelularesJpaController1(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    
-    //Con este metodo el JPA va a crear una nueva instancia creando un administrador de propiedades teniendo en cuenta nuestras clases mapeadas
-    public CelularesJpaController() {
-        emf = Persistence.createEntityManagerFactory("testJPA");
-    }
-    
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {

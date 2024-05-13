@@ -1,5 +1,8 @@
 package logica;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import persistencia.ControladoraPersistencia;
 
@@ -7,7 +10,7 @@ public class Controladora {
 
     ControladoraPersistencia controlPersis = new ControladoraPersistencia();
 
-    public void guardar(String nombre, String marcaIndex, String almacenamientoIndex, String ramIndex, String costo, String precio) {
+    public void registrarCelular(String nombre, String marcaIndex, String almacenamientoIndex, String ramIndex, String costo, String precio, String estado) {
         Celulares cel = new Celulares();
         cel.setNombreDisp(nombre);
         cel.setMarca(marcaIndex);
@@ -15,7 +18,8 @@ public class Controladora {
         cel.setRam(ramIndex);
         cel.setCosto(costo);
         cel.setPrecio(precio);
-        controlPersis.guardar(cel);
+        cel.setEstado(estado);
+        controlPersis.guardarCelular(cel);
     }
 
     public List<Celulares> traerCelulares() {
@@ -38,8 +42,26 @@ public class Controladora {
         cel.setRam(ramIndex);
         cel.setCosto(costo);
         cel.setPrecio(precio);
-        
+
         controlPersis.modificarCelular(cel);
+    }
+
+    public void registrarVenta(LocalDate fechaActual,
+            String nombreCliente, String numTelefono, String userResponsable, Celulares cel) {
+
+        VentasCelulares venta = new VentasCelulares();
+
+        venta.setNombreCliente(nombreCliente);
+        venta.setNumeroCliente(numTelefono);
+        venta.setFechaVenta(Date.from(fechaActual.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        venta.setCelular(cel);
+        venta.setResponsable(userResponsable);
+
+        cel.setEstado("Vendido");
+
+        controlPersis.modificarCelular(cel);
+
+        controlPersis.guardarVentaCelular(venta);
     }
 
 }

@@ -13,36 +13,35 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import logica.Celulares;
+import logica.VentasCelulares;
 import persistencia.exceptions.NonexistentEntityException;
 
 /**
  *
  * @author Usuario
  */
-public class CelularesJpaController implements Serializable {
+public class VentasCelularesJpaController implements Serializable {
 
-    public CelularesJpaController(EntityManagerFactory emf) {
+    public VentasCelularesJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    
+
     //Con este metodo el JPA va a crear una nueva instancia creando un administrador de propiedades teniendo en cuenta nuestras clases mapeadas
-    public CelularesJpaController() {
+    public VentasCelularesJpaController() {
         emf = Persistence.createEntityManagerFactory("testJPA");
     }
-    
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
-    public void create(Celulares celulares) {
+    public void create(VentasCelulares ventasCelulares) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(celulares);
+            em.persist(ventasCelulares);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -51,19 +50,19 @@ public class CelularesJpaController implements Serializable {
         }
     }
 
-    public void edit(Celulares celulares) throws NonexistentEntityException, Exception {
+    public void edit(VentasCelulares ventasCelulares) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            celulares = em.merge(celulares);
+            ventasCelulares = em.merge(ventasCelulares);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                int id = celulares.getId();
-                if (findCelulares(id) == null) {
-                    throw new NonexistentEntityException("The celulares with id " + id + " no longer exists.");
+                int id = ventasCelulares.getId();
+                if (findVentasCelulares(id) == null) {
+                    throw new NonexistentEntityException("The ventasCelulares with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -79,14 +78,14 @@ public class CelularesJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Celulares celulares;
+            VentasCelulares ventasCelulares;
             try {
-                celulares = em.getReference(Celulares.class, id);
-                celulares.getId();
+                ventasCelulares = em.getReference(VentasCelulares.class, id);
+                ventasCelulares.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The celulares with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The ventasCelulares with id " + id + " no longer exists.", enfe);
             }
-            em.remove(celulares);
+            em.remove(ventasCelulares);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -95,19 +94,19 @@ public class CelularesJpaController implements Serializable {
         }
     }
 
-    public List<Celulares> findCelularesEntities() {
-        return findCelularesEntities(true, -1, -1);
+    public List<VentasCelulares> findVentasCelularesEntities() {
+        return findVentasCelularesEntities(true, -1, -1);
     }
 
-    public List<Celulares> findCelularesEntities(int maxResults, int firstResult) {
-        return findCelularesEntities(false, maxResults, firstResult);
+    public List<VentasCelulares> findVentasCelularesEntities(int maxResults, int firstResult) {
+        return findVentasCelularesEntities(false, maxResults, firstResult);
     }
 
-    private List<Celulares> findCelularesEntities(boolean all, int maxResults, int firstResult) {
+    private List<VentasCelulares> findVentasCelularesEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Celulares.class));
+            cq.select(cq.from(VentasCelulares.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -119,20 +118,20 @@ public class CelularesJpaController implements Serializable {
         }
     }
 
-    public Celulares findCelulares(int id) {
+    public VentasCelulares findVentasCelulares(int id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Celulares.class, id);
+            return em.find(VentasCelulares.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getCelularesCount() {
+    public int getVentasCelularesCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Celulares> rt = cq.from(Celulares.class);
+            Root<VentasCelulares> rt = cq.from(VentasCelulares.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
@@ -140,5 +139,5 @@ public class CelularesJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

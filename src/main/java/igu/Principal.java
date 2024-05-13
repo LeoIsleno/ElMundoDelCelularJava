@@ -21,6 +21,8 @@ public class Principal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         btn_registrar_equipo = new javax.swing.JMenu();
         btn_Registrar_Celular = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,6 +55,18 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(btn_registrar_equipo);
 
+        jMenu2.setText("Vender Productos");
+
+        jMenuItem1.setText("Celulares");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu2);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -83,8 +97,22 @@ public class Principal extends javax.swing.JFrame {
         } catch (java.beans.PropertyVetoException e) {
             // Manejar excepciones si es necesario
         }
-        
     }//GEN-LAST:event_btn_Registrar_CelularActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        if (internalFrame == null || internalFrame.isClosed()) {
+            // Si no hay una instancia abierta o está cerrada, crea una nueva instancia
+            internalFrame = new VenderCelulares();
+            VentanaPrincipal.add(internalFrame);
+        }
+        // Trae el InternalFrame existente al frente
+        internalFrame.setVisible(true);
+        try {
+            internalFrame.setSelected(true);
+        } catch (java.beans.PropertyVetoException e) {
+            // Manejar excepciones si es necesario
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -92,6 +120,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem btn_Registrar_Celular;
     private javax.swing.JMenu btn_registrar_equipo;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }
