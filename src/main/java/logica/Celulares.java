@@ -21,11 +21,12 @@ public class Celulares implements Serializable {
     private String costo;
     private String precio;
     private String estado;
+    private String imei;
 
     public Celulares() {
     }
 
-    public Celulares(int id, String nombreDisp, String marca, String almacenamiento, String ram, String costo, String precio, String estado) {
+    public Celulares(int id, String nombreDisp, String marca, String almacenamiento, String ram, String costo, String precio, String estado, String imei) {
         this.id = id;
         this.nombreDisp = nombreDisp;
         this.marca = marca;
@@ -34,7 +35,18 @@ public class Celulares implements Serializable {
         this.costo = costo;
         this.precio = precio;
         this.estado = estado;
+        this.imei = imei;
     }
+
+    public String getImei() {
+        return imei;
+    }
+
+    public void setImei(String imei) {
+        this.imei = imei;
+    }
+
+    
 
     public String getEstado() {
         return estado;

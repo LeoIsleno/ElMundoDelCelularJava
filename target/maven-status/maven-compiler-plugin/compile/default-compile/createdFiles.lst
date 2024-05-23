@@ -5,6 +5,7 @@ logica\Celulares_.class
 logica\VentasCelulares_.class
 igu\RegistrarCelularForm$6.class
 logica\Usuarios.class
+igu\Principal$3.class
 igu\Utilidades.class
 igu\VenderCelulares$1.class
 igu\VenderCelulares.class
@@ -15,8 +16,8 @@ igu\RegistrarCelularForm$5.class
 persistencia\UsuariosJpaController.class
 persistencia\VentasCelularesJpaController.class
 persistencia\exceptions\PreexistingEntityException.class
-Utilidades.class
 igu\RegistrarCelularForm$8.class
+logica\Utilidades.class
 persistencia\ControladoraPersistencia.class
 persistencia\exceptions\IllegalOrphanException.class
 com\mycompany\appmigestion_leo\gestionapp_Leo.class
@@ -24,12 +25,15 @@ igu\RegistrarCelularForm$7.class
 igu\VenderCelulares$3.class
 logica\VentasCelulares.class
 persistencia\CelularesJpaController1.class
+igu\Estadisticas.class
 igu\VenderCelulares$5.class
 igu\Principal$2.class
 igu\RegistrarCelularForm$2.class
+PdfWriter.class
 logica\Controladora.class
 igu\Principal.class
 persistencia\CelularesJpaController.class
+igu\Principal$4.class
 logica\Usuarios_.class
 igu\VenderCelulares$2.class
 persistencia\exceptions\NonexistentEntityException.class

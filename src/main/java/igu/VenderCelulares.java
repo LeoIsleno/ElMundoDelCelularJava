@@ -1,12 +1,17 @@
+
 package igu;
 
+import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import logica.Celulares;
 import logica.Controladora;
 import logica.Usuarios;
+import logica.VentasCelulares;
+
 
 public class VenderCelulares extends javax.swing.JInternalFrame {
     //Textos
@@ -19,7 +24,7 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
     String mensajeEditado = "Se Edito el celular";
     String tituloEliminar = "Eliminar";
     String Alerta = "Alerta";
-
+    
     Controladora control = null;
     Celulares cel;
     Usuarios user;
@@ -36,7 +41,8 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
         //Seteamos los campos no editables
         setCamposNoEditables();
     }
-
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -83,7 +89,7 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -197,10 +203,12 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
                     .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel48))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_vender)
-                    .addComponent(bnt_Cancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(bnt_Cancelar)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btn_vender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -227,6 +235,7 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
 
     private void btn_venderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_venderActionPerformed
         registrarVenta();
+        crearRemitoPDF();
     }//GEN-LAST:event_btn_venderActionPerformed
 
     private void btn_seleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_seleccionarActionPerformed
@@ -252,9 +261,8 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
                 return false;
             }
         };
-
         //Creamos el objeto de la tabla con sus titulos
-        String titulos[] = {"ID", "Dispositivo", "Marca", "Almacenamiento", "Ram", "Precio"};
+        String titulos[] = {"ID", "Dispositivo", "Marca", "Almacenamiento", "IMEI", "Ram", "Precio"};
 
         //Seteamos la tabla con los titulos
         modeloTabla.setColumnIdentifiers(titulos);
@@ -271,13 +279,12 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
                         cel.getNombreDisp(),
                         cel.getMarca(),
                         cel.getAlmacenamiento(),
+                        cel.getImei(),
                         cel.getRam(),
-                        cel.getPrecio()
-                    };
+                        cel.getPrecio(),};
                     //Las añadimos a la tabla
                     modeloTabla.addRow(objCelulares);
                 }
-
             }
         }
 
@@ -314,19 +321,27 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
             //Datos del formulario
             String nombreCliente = txt_nombreCliente.getText();
             String numTelefono = txt_NumeroTelefono.getText();
-            LocalDate fechaActual = LocalDate.now();
+            String formaPago = (String) cmb_formaPago.getSelectedItem();
 
-            //Enviamos al a controladora los datos a subir a la BD
-            control.registrarVenta(fechaActual, nombreCliente, numTelefono, this.user.getNombreVendedor(), this.cel);
-            
-            // Eliminan todo los campos
-            limpiarCampos();
-            
-            //Volvemos a llamar a la tabla
-            cargarTabla();
-            
-            //Mensje
-            Utilidades.MostrarMensaje("Celular Vendido", mensajeInfo, "Venta");
+            if (nombreCliente.equals("") && numTelefono.equals("")) {
+                //Mensje
+                Utilidades.MostrarMensaje("Completa todos los campos", mensajeError, Alerta);
+            } else {
+                LocalDate fechaActual = LocalDate.now();
+
+                //Enviamos al a controladora los datos a subir a la BD
+                control.registrarVenta(fechaActual, nombreCliente, numTelefono, this.user.getNombreVendedor(), formaPago, this.cel);
+
+                // Eliminan todo los campos
+                limpiarCampos();
+
+                //Volvemos a llamar a la tabla
+                cargarTabla();
+
+                //Mensje
+                Utilidades.MostrarMensaje("Celular Vendido", mensajeInfo, "Venta");
+            }
+
         } else {
             Utilidades.MostrarMensaje(itemNoSeleccionado, mensajeInfo, Alerta);
         }
@@ -345,7 +360,7 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
 
                 //Seteamos las variables para visibilizar
                 txt_SeleccionCel.setText(this.cel.getNombreDisp() + " | " + this.cel.getMarca() + " | "
-                        + this.cel.getAlmacenamiento() + " | " + this.cel.getRam());
+                        + this.cel.getAlmacenamiento() + " | " + this.cel.getRam() + "|" + this.cel.getImei());
                 txt_precio.setText(this.cel.getPrecio());
 
                 return !txt_SeleccionCel.equals("") && !txt_precio.equals("");
@@ -378,5 +393,16 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
         //No se puede editar el seleccion de equipo
         txt_SeleccionCel.setEditable(false);
         txt_precio.setEditable(false);
+    }
+
+    private void crearRemitoPDF() {
+        //Traer todas las ventas
+        List registroCelularesVendidos = control.traerRegistrosVentas();
+        
+        try {
+            Utilidades.crearReciboVenta(registroCelularesVendidos, this.cel);
+        } catch (IOException ex) {
+            Logger.getLogger(VenderCelulares.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

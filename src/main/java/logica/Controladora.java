@@ -10,7 +10,8 @@ public class Controladora {
 
     ControladoraPersistencia controlPersis = new ControladoraPersistencia();
 
-    public void registrarCelular(String nombre, String marcaIndex, String almacenamientoIndex, String ramIndex, String costo, String precio, String estado) {
+    //Celulares
+    public void registrarCelular(String nombre, String marcaIndex, String almacenamientoIndex, String ramIndex, String costo, String precio, String estado, String imei) {
         Celulares cel = new Celulares();
         cel.setNombreDisp(nombre);
         cel.setMarca(marcaIndex);
@@ -19,6 +20,7 @@ public class Controladora {
         cel.setCosto(costo);
         cel.setPrecio(precio);
         cel.setEstado(estado);
+        cel.setImei(imei);
         controlPersis.guardarCelular(cel);
     }
 
@@ -46,8 +48,9 @@ public class Controladora {
         controlPersis.modificarCelular(cel);
     }
 
-    public void registrarVenta(LocalDate fechaActual,
-            String nombreCliente, String numTelefono, String userResponsable, Celulares cel) {
+    //Ventas
+    
+    public void registrarVenta(LocalDate fechaActual, String nombreCliente, String numTelefono, String userResponsable, String formaPago, Celulares cel) {
 
         VentasCelulares venta = new VentasCelulares();
 
@@ -56,12 +59,17 @@ public class Controladora {
         venta.setFechaVenta(Date.from(fechaActual.atStartOfDay(ZoneId.systemDefault()).toInstant()));
         venta.setCelular(cel);
         venta.setResponsable(userResponsable);
+        venta.setFormaPago(formaPago);
 
         cel.setEstado("Vendido");
 
         controlPersis.modificarCelular(cel);
 
         controlPersis.guardarVentaCelular(venta);
+    }
+
+    public List<VentasCelulares> traerRegistrosVentas() {
+        return controlPersis.traerVentaCelulares();
     }
 
 }

@@ -49,7 +49,7 @@ public class ControladoraPersistencia {
         ventaCelJPA.create(ventaCel);
     }
 
-    //Trae todo el listado de celulares
+    //Trae todo el listado de ventas de celulares
     public List<VentasCelulares> traerVentaCelulares() {
         return ventaCelJPA.findVentasCelularesEntities();
     }

@@ -26,6 +26,7 @@ public class VentasCelulares implements Serializable {
     private String nombreCliente;
     private String numeroCliente;
     private String responsable;
+    private String formaPago;
 
     @OneToOne
     private Celulares celular;
@@ -33,13 +34,22 @@ public class VentasCelulares implements Serializable {
     public VentasCelulares() {
     }
 
-    public VentasCelulares(int id, Date fechaVenta, String nombreCliente, String numeroCliente, String responsable, Celulares celular) {
+    public VentasCelulares(int id, Date fechaVenta, String nombreCliente, String numeroCliente, String responsable, String formaPago, Celulares celular) {
         this.id = id;
         this.fechaVenta = fechaVenta;
         this.nombreCliente = nombreCliente;
         this.numeroCliente = numeroCliente;
         this.responsable = responsable;
+        this.formaPago = formaPago;
         this.celular = celular;
+    }
+
+    public String getFormaPago() {
+        return formaPago;
+    }
+
+    public void setFormaPago(String formaPago) {
+        this.formaPago = formaPago;
     }
 
     public String getResponsable() {
@@ -49,9 +59,6 @@ public class VentasCelulares implements Serializable {
     public void setResponsable(String responsable) {
         this.responsable = responsable;
     }
-
-
-
 
     public int getId() {
         return id;

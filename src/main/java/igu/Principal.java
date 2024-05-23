@@ -19,14 +19,17 @@ public class Principal extends javax.swing.JFrame {
         VentanaPrincipal = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        btn_salir = new javax.swing.JMenuItem();
         btn_registrar_equipo = new javax.swing.JMenu();
         btn_Registrar_Celular = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        btn_estadisticasGeneral = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        VentanaPrincipal.setBackground(new java.awt.Color(204, 255, 204));
+        VentanaPrincipal.setBackground(new java.awt.Color(255, 255, 255));
         VentanaPrincipal.setForeground(new java.awt.Color(255, 204, 204));
 
         javax.swing.GroupLayout VentanaPrincipalLayout = new javax.swing.GroupLayout(VentanaPrincipal);
@@ -41,6 +44,15 @@ public class Principal extends javax.swing.JFrame {
         );
 
         jMenu1.setText("Menu");
+
+        btn_salir.setText("Salir");
+        btn_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_salirActionPerformed(evt);
+            }
+        });
+        jMenu1.add(btn_salir);
+
         jMenuBar1.add(jMenu1);
 
         btn_registrar_equipo.setText("Registrar Productos");
@@ -66,6 +78,18 @@ public class Principal extends javax.swing.JFrame {
         jMenu2.add(jMenuItem1);
 
         jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Estadisticas");
+
+        btn_estadisticasGeneral.setText("Estadisticas General");
+        btn_estadisticasGeneral.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_estadisticasGeneralActionPerformed(evt);
+            }
+        });
+        jMenu3.add(btn_estadisticasGeneral);
+
+        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -114,13 +138,35 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btn_salirActionPerformed
+
+    private void btn_estadisticasGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_estadisticasGeneralActionPerformed
+         if (internalFrame == null || internalFrame.isClosed()) {
+            // Si no hay una instancia abierta o está cerrada, crea una nueva instancia
+            internalFrame = new Estadisticas();
+            VentanaPrincipal.add(internalFrame);
+        }
+        // Trae el InternalFrame existente al frente
+        internalFrame.setVisible(true);
+        try {
+            internalFrame.setSelected(true);
+        } catch (java.beans.PropertyVetoException e) {
+            // Manejar excepciones si es necesario
+        }
+    }//GEN-LAST:event_btn_estadisticasGeneralActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane VentanaPrincipal;
     private javax.swing.JMenuItem btn_Registrar_Celular;
+    private javax.swing.JMenuItem btn_estadisticasGeneral;
     private javax.swing.JMenu btn_registrar_equipo;
+    private javax.swing.JMenuItem btn_salir;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
