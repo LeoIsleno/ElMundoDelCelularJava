@@ -29,7 +29,6 @@ igu\Estadisticas.class
 igu\VenderCelulares$5.class
 igu\Principal$2.class
 igu\RegistrarCelularForm$2.class
-PdfWriter.class
 logica\Controladora.class
 igu\Principal.class
 persistencia\CelularesJpaController.class

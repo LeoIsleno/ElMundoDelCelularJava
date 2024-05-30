@@ -127,7 +127,6 @@ public class Utilidades {
                 document.add(tableVentaCel);
                 document.add(new Paragraph("\n"));
                 document.add(new Paragraph("TOTAL: $" + cel.getPrecio()).setFontSize(15).setBold().setTextAlignment(TextAlignment.RIGHT));
-
             }
             System.out.println("PDF creado exitosamente en " + dest);
         } catch (FileNotFoundException e) {
