@@ -71,5 +71,14 @@ public class Controladora {
     public List<VentasCelulares> traerRegistrosVentas() {
         return controlPersis.traerVentaCelulares();
     }
+    
+    //Usuarios
+    
+    public List<Usuarios> getUsers(){
+        return controlPersis.traerUsuarios();
+    }
 
+    public void guardarUsuario(Usuarios user) {
+        controlPersis.guardarUsuarior(user);
+    }
 }
