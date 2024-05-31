@@ -2,14 +2,11 @@ package com.mycompany.appmigestion_leo;
 
 import igu.Login;
 import igu.Principal;
-import logica.Controladora;
 import logica.Usuarios;
 
 public class gestionapp_Leo {
     
-
     public static void main(String[] args) {
-
         Login log = new Login();
         log.setVisible(true);
     }

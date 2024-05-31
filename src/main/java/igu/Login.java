@@ -3,6 +3,7 @@ package igu;
 import com.mycompany.appmigestion_leo.gestionapp_Leo;
 import java.util.List;
 import logica.Controladora;
+import logica.UsuarioSingleton;
 import logica.Usuarios;
 
 public class Login extends javax.swing.JFrame {
@@ -151,13 +152,14 @@ public class Login extends javax.swing.JFrame {
             for (Usuarios usuario : listUser) {
                 if ((usuario.getUser() == null ? user == null : usuario.getUser().equals(user)) && (usuario.getPass() == null ? pass == null : usuario.getPass().equals(pass))) {
                     gestionapp_Leo.initApp();
+                    UsuarioSingleton.setInstance(usuario); // Guardar el usuario en el singleton
                     flagUserEncontrar = true;
                     this.dispose();
                 }
             }
         }
         if (!flagUserEncontrar){
-            Utilidades.MostrarMensaje("Error al Iniciar", "Error", "Inicio Sesion");
+            Utilidades.MostrarMensaje("Usuario o Contraseña Invalida", "Error", "Inicio Sesion");
         }        
     }
 }

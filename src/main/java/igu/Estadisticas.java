@@ -259,15 +259,20 @@ public class Estadisticas extends javax.swing.JInternalFrame {
         // Establecer el formato para el nombre del mes en español
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM", new Locale("es"));
 
-        for (VentasCelulares venta : ventas) {
+         for (VentasCelulares venta : ventas) {
             // Convertir la fecha de venta de Date a LocalDate
             LocalDate fecha = venta.getFechaVenta().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             String nombreMes = fecha.getMonth().getDisplayName(TextStyle.FULL, new Locale("es"));
-            // Convertir el precio de String a double
-            double monto = Double.parseDouble(venta.getCelular().getPrecio());
-            // Sumar el monto al mes correspondiente
-            ventasPorMes.put(nombreMes, ventasPorMes.getOrDefault(nombreMes, 0.0) + monto);
+
+            // Convertir el precio y el costo de String a double
+            double precio = Double.parseDouble(venta.getCelular().getPrecio());
+            double costo = Double.parseDouble(venta.getCelular().getCosto());
+            double ganancia = precio - costo;
+
+            // Sumar la ganancia al mes correspondiente
+            ventasPorMes.put(nombreMes, ventasPorMes.getOrDefault(nombreMes, 0.0) + ganancia);
         }
+
 
         // Crear una cadena con la información de las ventas por mes
         StringBuilder resultado = new StringBuilder();

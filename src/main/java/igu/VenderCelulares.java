@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import logica.Celulares;
 import logica.Controladora;
+import logica.UsuarioSingleton;
 import logica.Usuarios;
 import logica.VentasCelulares;
 
@@ -27,16 +28,16 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
     
     Controladora control = null;
     Celulares cel;
-    Usuarios user;
+    //Usuarios user;
 
     public VenderCelulares() {
         control = new Controladora();
-        user = new Usuarios();
+        //user = new Usuarios();
         initComponents();
         setClosable(true);
         cargarTabla();
 
-        user.setNombreVendedor("Leo");
+        //user.setNombreVendedor("Leo");
 
         //Seteamos los campos no editables
         setCamposNoEditables();
@@ -322,6 +323,7 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
             String nombreCliente = txt_nombreCliente.getText();
             String numTelefono = txt_NumeroTelefono.getText();
             String formaPago = (String) cmb_formaPago.getSelectedItem();
+            Usuarios usuarioActual = UsuarioSingleton.getInstance();
 
             if (nombreCliente.equals("") && numTelefono.equals("")) {
                 //Mensje
@@ -330,7 +332,7 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
                 LocalDate fechaActual = LocalDate.now();
 
                 //Enviamos al a controladora los datos a subir a la BD
-                control.registrarVenta(fechaActual, nombreCliente, numTelefono, this.user.getNombreVendedor(), formaPago, this.cel);
+                control.registrarVenta(fechaActual, nombreCliente, numTelefono, usuarioActual.getNombreVendedor(), formaPago, this.cel);
 
                 // Eliminan todo los campos
                 limpiarCampos();
