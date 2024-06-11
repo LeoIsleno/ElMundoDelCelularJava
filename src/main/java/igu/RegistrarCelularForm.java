@@ -6,6 +6,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.table.DefaultTableModel;
 import logica.Celulares;
 import logica.Controladora;
+import logica.UsuarioSingleton;
+import logica.Usuarios;
 
 public class RegistrarCelularForm extends JInternalFrame {
 
@@ -30,6 +32,8 @@ public class RegistrarCelularForm extends JInternalFrame {
         CargarTabla();
         SetBotones();
         setClosable(true);
+
+        initPermision();
     }
 
     @SuppressWarnings("unchecked")
@@ -370,7 +374,7 @@ public class RegistrarCelularForm extends JInternalFrame {
 
         //Creamos el objeto de la tabla con sus titulos
         String titulos[] = {"ID", "Dispositivo", "Marca", "Almacenamiento", "IMEI", "Ram", "Precio"};
-        
+
         //Seteamos la tabla con los titulos
         modeloTabla.setColumnIdentifiers(titulos);
 
@@ -427,6 +431,7 @@ public class RegistrarCelularForm extends JInternalFrame {
         txt_nombre.setText("");
         txt_costo.setText("");
         txt_precio.setText("");
+        txt_imei.setText("");
         comb_almacenamiento.setSelectedIndex(0);
         comb_marca.setSelectedIndex(0);
         comb_ram.setSelectedIndex(0);
@@ -457,6 +462,7 @@ public class RegistrarCelularForm extends JInternalFrame {
                 comb_almacenamiento.setSelectedIndex(SeterAlmacenamiento(cel.getAlmacenamiento()));
                 comb_marca.setSelectedIndex(SeterMarca(cel.getMarca()));
                 comb_ram.setSelectedIndex(SeterRam(cel.getRam()));
+                txt_imei.setText(cel.getImei());
 
             } else {
                 // Mensaje de alerta: no se seleccionó ninguna fila
@@ -551,8 +557,9 @@ public class RegistrarCelularForm extends JInternalFrame {
         String almacenamientoIndex = (String) comb_almacenamiento.getSelectedItem();
         String marcaIndex = (String) comb_marca.getSelectedItem();
         String ramIndex = (String) comb_ram.getSelectedItem();
+        String imeiCel = txt_imei.getText();
 
-        control.actualizarCelular(cel, nombre, marcaIndex, almacenamientoIndex, ramIndex, costo, precio);
+        control.actualizarCelular(cel, nombre, marcaIndex, almacenamientoIndex, ramIndex, costo, precio, imeiCel);
         Utilidades.MostrarMensaje("Se modifico exitosamente", "Info", "Actualizado");
 
         //Seteamos los botones
@@ -563,5 +570,17 @@ public class RegistrarCelularForm extends JInternalFrame {
 
         //Volvemos a inicializar la tabla para que muestre nuevamente los datos
         CargarTabla();
+    }
+
+    private void initPermision() {
+        Usuarios usuarioActual = UsuarioSingleton.getInstance();
+
+        if (!"Fabian-Jefe".equals(usuarioActual.getNombreVendedor())) {
+            btn_eliminar.setEnabled(false);
+            btn_editar.setEnabled(false);
+        } else {
+            btn_eliminar.setEnabled(true);
+            btn_editar.setEnabled(true);
+        }
     }
 }

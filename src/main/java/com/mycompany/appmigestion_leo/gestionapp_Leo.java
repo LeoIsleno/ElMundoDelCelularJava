@@ -2,7 +2,6 @@ package com.mycompany.appmigestion_leo;
 
 import igu.Login;
 import igu.Principal;
-import logica.Usuarios;
 
 public class gestionapp_Leo {
     

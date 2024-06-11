@@ -14,15 +14,25 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.layout.property.UnitValue;
 import java.awt.Color;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Level;
 import logica.*;
 import javax.swing.JOptionPane;
 import javax.swing.JDialog;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.printing.PDFPageable;
 
 public class Utilidades {
+
+    String destino = "";
 
     //Funcion general para mostrar un mensaje por pantalla
     public static void MostrarMensaje(String mensaje, String tipo, String titulo) {
@@ -121,26 +131,21 @@ public class Utilidades {
                 //Separador
                 document.add(new Paragraph("Nombre del comprador: " + ventaNueva.getNombreCliente()).setFontSize(10).setBold());
                 document.add(new Paragraph("Numero de telefono del comprador: " + ventaNueva.getNumeroCliente()).setFontSize(10).setBold());
+                document.add(new Paragraph("Nombre del Vendedor Responsable: " + ventaNueva.getResponsable()).setFontSize(10).setBold());
 
                 document.add(new Paragraph("Detalles de compra:").setFontSize(10));
                 //tabla de informacion
                 document.add(tableVentaCel);
                 document.add(new Paragraph("\n"));
-                document.add(new Paragraph("TOTAL: $" + cel.getPrecio()).setFontSize(15).setBold().setTextAlignment(TextAlignment.RIGHT));
+
+                document.add(new Paragraph("Detalles: " + ventaNueva.getDetalles()).setFontSize(10));
+                document.add(new Paragraph("Se toma por parte de pago la cantidad de $: " + ventaNueva.getValorDejado()).setFontSize(10));
+                document.add(new Paragraph("TOTAL A COBRAR: $" + cel.getPrecio()).setFontSize(15).setBold().setTextAlignment(TextAlignment.RIGHT));
             }
             System.out.println("PDF creado exitosamente en " + dest);
         } catch (FileNotFoundException e) {
             System.out.println("Problemas al imprimir");
         }
-    }
-
-    private static void addHeaderCell(Table table, String text, PdfFont font) {
-        Cell cell = new Cell().add(text);
-        cell.setFont(font);
-        cell.setFontSize(12);
-        cell.setBold();
-        cell.setTextAlignment(TextAlignment.CENTER);
-        table.addCell(cell);
     }
 
     public static LocalDate getCurrentDate() {
@@ -160,5 +165,36 @@ public class Utilidades {
         }
         return ventaMaxId;
     }
+
+    public static File obtenerUltimoPDFGenerado(String directorio) {
+        File carpeta = new File(directorio);
+        File[] archivos = carpeta.listFiles((dir, nombre) -> nombre.toLowerCase().endsWith(".pdf"));
+
+        if (archivos == null || archivos.length == 0) {
+            return null; // No se encontraron archivos PDF en el directorio
+        }
+
+        Arrays.sort(archivos, Comparator.comparingLong(File::lastModified).reversed());
+
+        return archivos[0]; // Devuelve el archivo PDF más reciente
+    }
+    
+    public static void imprimirUltimoPDFGenerado(String directorio) throws PrinterException, IOException {
+    File ultimoPDF = obtenerUltimoPDFGenerado(directorio);
+
+    if (ultimoPDF != null) {
+        PDDocument document = PDDocument.load(ultimoPDF);
+
+        PrinterJob job = PrinterJob.getPrinterJob();
+
+        if (job.printDialog()) {
+            job.setPageable(new PDFPageable(document));
+            job.print();
+        }
+    } else {
+        System.out.println("No se encontraron archivos PDF en el directorio especificado.");
+    }
+}
+
 
 }

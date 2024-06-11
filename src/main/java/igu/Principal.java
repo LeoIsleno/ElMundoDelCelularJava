@@ -1,6 +1,8 @@
 package igu;
 
 import javax.swing.JInternalFrame;
+import logica.UsuarioSingleton;
+import logica.Usuarios;
 
 public class Principal extends javax.swing.JFrame {
 
@@ -8,8 +10,14 @@ public class Principal extends javax.swing.JFrame {
 
     //private LoginFormFrame loginForm;
     public Principal() {
+        this.setUndecorated(true); // Esto elimina toda la barra de título y bordes
+
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
+        setPermision();
+
+        setLocationRelativeTo(null);
+        setResizable(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -19,13 +27,12 @@ public class Principal extends javax.swing.JFrame {
         VentanaPrincipal = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        btn_userInfo = new javax.swing.JMenuItem();
         btn_salir = new javax.swing.JMenuItem();
         btn_registrar_equipo = new javax.swing.JMenu();
         btn_Registrar_Celular = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        btnMenu_Estadisticas = new javax.swing.JMenu();
         btn_estadisticasGeneral = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -45,14 +52,6 @@ public class Principal extends javax.swing.JFrame {
         );
 
         jMenu1.setText("Menu");
-
-        btn_userInfo.setText("Userio Info");
-        btn_userInfo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_userInfoActionPerformed(evt);
-            }
-        });
-        jMenu1.add(btn_userInfo);
 
         btn_salir.setText("Salir");
         btn_salir.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +87,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Estadisticas");
+        btnMenu_Estadisticas.setText("Estadisticas");
 
         btn_estadisticasGeneral.setText("Estadisticas General");
         btn_estadisticasGeneral.addActionListener(new java.awt.event.ActionListener() {
@@ -96,9 +95,9 @@ public class Principal extends javax.swing.JFrame {
                 btn_estadisticasGeneralActionPerformed(evt);
             }
         });
-        jMenu3.add(btn_estadisticasGeneral);
+        btnMenu_Estadisticas.add(btn_estadisticasGeneral);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(btnMenu_Estadisticas);
 
         setJMenuBar(jMenuBar1);
 
@@ -147,10 +146,6 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void btn_userInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_userInfoActionPerformed
-         
-    }//GEN-LAST:event_btn_userInfoActionPerformed
-
     private void btn_estadisticasGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_estadisticasGeneralActionPerformed
         if (internalFrame == null || internalFrame.isClosed()) {
             // Si no hay una instancia abierta o está cerrada, crea una nueva instancia
@@ -173,15 +168,30 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane VentanaPrincipal;
+    private javax.swing.JMenu btnMenu_Estadisticas;
     private javax.swing.JMenuItem btn_Registrar_Celular;
     private javax.swing.JMenuItem btn_estadisticasGeneral;
     private javax.swing.JMenu btn_registrar_equipo;
     private javax.swing.JMenuItem btn_salir;
-    private javax.swing.JMenuItem btn_userInfo;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
+
+    private void setPermision() {
+        Usuarios usuarioActual = UsuarioSingleton.getInstance();
+        System.out.println("user:" + usuarioActual.getNombreVendedor());
+        System.out.println("pass:" + usuarioActual.getPass());
+        System.out.println("nombre:" + usuarioActual.getNombreVendedor());
+
+        if (!"Fabian-Jefe".equals(usuarioActual.getNombreVendedor())) {
+            btnMenu_Estadisticas.setEnabled(false);
+            btnMenu_Estadisticas.setVisible(false);
+
+        } else {
+            btnMenu_Estadisticas.setEnabled(true);
+            btnMenu_Estadisticas.setVisible(true);
+        }
+    }
 }

@@ -27,22 +27,45 @@ public class VentasCelulares implements Serializable {
     private String numeroCliente;
     private String responsable;
     private String formaPago;
+    private String valorDejado;
+    private String detalles;
 
+    
     @OneToOne
     private Celulares celular;
 
     public VentasCelulares() {
     }
 
-    public VentasCelulares(int id, Date fechaVenta, String nombreCliente, String numeroCliente, String responsable, String formaPago, Celulares celular) {
+    public VentasCelulares(int id, Date fechaVenta, String nombreCliente, String numeroCliente, String responsable, String formaPago, String valorDejado, String detalles, Celulares celular) {
         this.id = id;
         this.fechaVenta = fechaVenta;
         this.nombreCliente = nombreCliente;
         this.numeroCliente = numeroCliente;
         this.responsable = responsable;
         this.formaPago = formaPago;
+        this.valorDejado = valorDejado;
+        this.detalles = detalles;
         this.celular = celular;
     }
+
+    public String getValorDejado() {
+        return valorDejado;
+    }
+
+    public void setValorDejado(String valorDejado) {
+        this.valorDejado = valorDejado;
+    }
+
+    public String getDetalles() {
+        return detalles;
+    }
+
+    public void setDetalles(String detalles) {
+        this.detalles = detalles;
+    }
+
+    
 
     public String getFormaPago() {
         return formaPago;

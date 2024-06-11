@@ -1,6 +1,7 @@
 package igu;
 
 import com.mycompany.appmigestion_leo.gestionapp_Leo;
+import java.awt.Color;
 import java.util.List;
 import logica.Controladora;
 import logica.UsuarioSingleton;
@@ -12,8 +13,13 @@ public class Login extends javax.swing.JFrame {
     private List<Usuarios> listUser = null;
 
     public Login() {
+        this.setUndecorated(true); // Esto elimina toda la barra de título y bordes
         initComponents();
         control = new Controladora();
+        
+        this.setBackground(new Color(23, 33, 43));
+        setLocationRelativeTo(null);
+        setResizable(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -45,6 +51,11 @@ public class Login extends javax.swing.JFrame {
         });
 
         jButton2.setText("Salir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Usuario");
 
@@ -98,9 +109,7 @@ public class Login extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,14 +121,18 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_ingresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ingresarMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_ingresarMouseClicked
-
     private void btn_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresarActionPerformed
         // TODO add your handling code here:
         initLogin();
     }//GEN-LAST:event_btn_ingresarActionPerformed
+
+    private void btn_ingresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ingresarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_ingresarMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -142,7 +155,6 @@ public class Login extends javax.swing.JFrame {
 //        us.setPass("123");
 //
 //        control.guardarUsuario(us);
-
         String user = txt_user.getText();
         String pass = txt_pass.getText();
         boolean flagUserEncontrar = false;
@@ -150,16 +162,17 @@ public class Login extends javax.swing.JFrame {
         listUser = control.getUsers();
         if (!"".equals(user) && !"".equals(pass)) {
             for (Usuarios usuario : listUser) {
-                if ((usuario.getUser() == null ? user == null : usuario.getUser().equals(user)) && (usuario.getPass() == null ? pass == null : usuario.getPass().equals(pass))) {
-                    gestionapp_Leo.initApp();
+                if (usuario.getUser().equals(user) && usuario.getPass().equals(pass)) {
                     UsuarioSingleton.setInstance(usuario); // Guardar el usuario en el singleton
                     flagUserEncontrar = true;
+                    gestionapp_Leo.initApp();
                     this.dispose();
+                    break; // Salir del bucle una vez que se encuentra el usuario
                 }
             }
         }
-        if (!flagUserEncontrar){
+        if (!flagUserEncontrar) {
             Utilidades.MostrarMensaje("Usuario o Contraseña Invalida", "Error", "Inicio Sesion");
-        }        
+        }
     }
 }
