@@ -30,8 +30,10 @@ public class Principal extends javax.swing.JFrame {
         btn_salir = new javax.swing.JMenuItem();
         btn_registrar_equipo = new javax.swing.JMenu();
         btn_Registrar_Celular = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         btnMenu_Estadisticas = new javax.swing.JMenu();
         btn_estadisticasGeneral = new javax.swing.JMenuItem();
 
@@ -63,7 +65,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        btn_registrar_equipo.setText("Registrar Productos");
+        btn_registrar_equipo.setText("Registrar");
 
         btn_Registrar_Celular.setText("Registrar Celular");
         btn_Registrar_Celular.addActionListener(new java.awt.event.ActionListener() {
@@ -73,9 +75,12 @@ public class Principal extends javax.swing.JFrame {
         });
         btn_registrar_equipo.add(btn_Registrar_Celular);
 
+        jMenuItem2.setText("Registrar Producto");
+        btn_registrar_equipo.add(jMenuItem2);
+
         jMenuBar1.add(btn_registrar_equipo);
 
-        jMenu2.setText("Vender Productos");
+        jMenu2.setText("Vender");
 
         jMenuItem1.setText("Celulares");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -84,6 +89,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem1);
+
+        jMenuItem3.setText("Productos");
+        jMenu2.add(jMenuItem3);
 
         jMenuBar1.add(jMenu2);
 
@@ -165,7 +173,6 @@ public class Principal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btn_salirActionPerformed
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane VentanaPrincipal;
     private javax.swing.JMenu btnMenu_Estadisticas;
@@ -177,6 +184,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     // End of variables declaration//GEN-END:variables
 
     private void setPermision() {

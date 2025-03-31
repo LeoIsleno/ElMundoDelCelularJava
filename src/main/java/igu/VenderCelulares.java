@@ -277,6 +277,7 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
         try {
             crearRemitoPDF();
         } catch (PrinterException ex) {
+            Utilidades.MostrarMensaje("no se pudo realizar la impresion debido a: " + ex, "Error", "Falla al imprimir");
             Logger.getLogger(VenderCelulares.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_venderActionPerformed
@@ -484,9 +485,10 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
             Utilidades.crearReciboVenta(registroCelularesVendidos, this.cel);
 
             // Imprimir el último PDF generado
-            Utilidades.imprimirUltimoPDFGenerado("E:/Documentos/NetBeansProjects/AppMiGestion_Leo"); // Especifica la ruta de tu directorio de archivos PDF
+            Utilidades.imprimirUltimoPDFGenerado("C:\\Users\\fabian\\Documents\\Mi Gestion App - Java\\Remitos Venta Celulares"); // Especifica la ruta de tu directorio de archivos PDF
 
         } catch (IOException ex) {
+            Utilidades.MostrarMensaje("No se pudo crear recibo por: " + ex, "Error", "Error al imprimir");
             Logger.getLogger(VenderCelulares.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

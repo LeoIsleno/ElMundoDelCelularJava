@@ -73,7 +73,7 @@ public class RegistrarCelularForm extends JInternalFrame {
 
         jLabel2.setText("Marca");
 
-        comb_marca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Samsung", "Motorola", "Iphone" }));
+        comb_marca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Samsung", "Motorola", "Iphone", "Xiaomi\t", "LG" }));
 
         jLabel3.setText("Almacenamiento (GB)");
 

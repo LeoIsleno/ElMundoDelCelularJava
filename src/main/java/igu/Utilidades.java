@@ -19,6 +19,8 @@ import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -50,16 +52,23 @@ public class Utilidades {
         dialog.setAlwaysOnTop(true);
     }
 
-    static void crearReciboVenta(List<VentasCelulares> listaVentas, Celulares cel) throws IOException {
+        public static void crearReciboVenta(List<VentasCelulares> listaVentas, Celulares cel) throws IOException {
 
         LocalDate currentDate = getCurrentDate();
 
-        //Buscamos la ultima venta realizada registrada en la BD para imprimir
+        // Buscamos la ultima venta realizada registrada en la BD para imprimir
         VentasCelulares ventaNueva = traerUltimaVenta(listaVentas);
-        //Seteamos el numero de remito con la ID asociada
+        // Seteamos el numero de remito con la ID asociada
         String numRemito = String.valueOf(ventaNueva.getId());
 
-        String dest = "Venta N° " + numRemito + ".pdf";
+        // Especificar la carpeta donde guardar los archivos PDF
+        String folderPath = "C:\\Users\\fabian\\Documents\\Mi Gestion App - Java\\Remitos Venta Celulares";
+        // Crear la carpeta si no existe
+        File directory = new File(folderPath);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        String dest = folderPath + "\\Venta_N_" + numRemito + ".pdf";
 
         try {
             PdfWriter writer = new PdfWriter(dest);
@@ -128,13 +137,13 @@ public class Utilidades {
 
                 // Añadir la tabla al documento
                 document.add(table);
-                //Separador
+                // Separador
                 document.add(new Paragraph("Nombre del comprador: " + ventaNueva.getNombreCliente()).setFontSize(10).setBold());
                 document.add(new Paragraph("Numero de telefono del comprador: " + ventaNueva.getNumeroCliente()).setFontSize(10).setBold());
                 document.add(new Paragraph("Nombre del Vendedor Responsable: " + ventaNueva.getResponsable()).setFontSize(10).setBold());
 
                 document.add(new Paragraph("Detalles de compra:").setFontSize(10));
-                //tabla de informacion
+                // tabla de informacion
                 document.add(tableVentaCel);
                 document.add(new Paragraph("\n"));
 
@@ -178,23 +187,22 @@ public class Utilidades {
 
         return archivos[0]; // Devuelve el archivo PDF más reciente
     }
-    
+
     public static void imprimirUltimoPDFGenerado(String directorio) throws PrinterException, IOException {
-    File ultimoPDF = obtenerUltimoPDFGenerado(directorio);
+        File ultimoPDF = obtenerUltimoPDFGenerado(directorio);
 
-    if (ultimoPDF != null) {
-        PDDocument document = PDDocument.load(ultimoPDF);
+        if (ultimoPDF != null) {
+            PDDocument document = PDDocument.load(ultimoPDF);
 
-        PrinterJob job = PrinterJob.getPrinterJob();
+            PrinterJob job = PrinterJob.getPrinterJob();
 
-        if (job.printDialog()) {
-            job.setPageable(new PDFPageable(document));
-            job.print();
+            if (job.printDialog()) {
+                job.setPageable(new PDFPageable(document));
+                job.print();
+            }
+        } else {
+            System.out.println("No se encontraron archivos PDF en el directorio especificado.");
         }
-    } else {
-        System.out.println("No se encontraron archivos PDF en el directorio especificado.");
     }
-}
-
 
 }
