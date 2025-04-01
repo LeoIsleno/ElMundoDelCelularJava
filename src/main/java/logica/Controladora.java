@@ -83,4 +83,11 @@ public class Controladora {
     public void guardarUsuario(Usuarios user) {
         controlPersis.guardarUsuarior(user);
     }
+    
+    //Productos de Celulares
+    
+    public List<Productos> traerProductos() {
+        return controlPersis.traerProductos();
+    }
+    
 }
