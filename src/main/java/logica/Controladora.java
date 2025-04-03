@@ -49,7 +49,6 @@ public class Controladora {
     }
 
     //Ventas
-    
     public void registrarVenta(LocalDate fechaActual, String nombreCliente, String numTelefono, String userResponsable, String formaPago, Celulares cel, String valorDejado, String detalles) {
 
         VentasCelulares venta = new VentasCelulares();
@@ -73,21 +72,48 @@ public class Controladora {
     public List<VentasCelulares> traerRegistrosVentas() {
         return controlPersis.traerVentaCelulares();
     }
-    
+
     //Usuarios
-    
-    public List<Usuarios> getUsers(){
+    public List<Usuarios> getUsers() {
         return controlPersis.traerUsuarios();
     }
 
     public void guardarUsuario(Usuarios user) {
         controlPersis.guardarUsuarior(user);
     }
-    
+
     //Productos de Celulares
-    
+    public void registrarProducto(String codigo, String categoria, int costo, int precioUnitario) {
+        Productos prod = new Productos();
+
+        prod.setCodigo(codigo);
+        prod.setCategoria(categoria);
+        prod.setCosto(costo);
+        prod.setPrecioUnitario(precioUnitario);
+        
+        controlPersis.guardarProducto(prod);
+    }
+
     public List<Productos> traerProductos() {
         return controlPersis.traerProductos();
     }
-    
+
+    public void EliminarProducto(int idProd) {
+        controlPersis.eliminarProductos(idProd);
+    }
+
+    public Productos traerProductosBuscado(int idProd) {
+        return controlPersis.traerProductoBuscado(idProd);
+    }
+
+    public void actualizarProducto(Productos prod/*int id, String codigo, String fecha, String categoria, String descripcion, int costo, int enStock, int precioUnitario*/) {
+        /*Productos prod = new Productos();
+        prod.setId(id);
+        prod.setCodigo(codigo);
+        prod.setCategoria(categoria);
+        prod.setCosto(costo);
+        prod.setPrecioUnitario(precioUnitario);
+        */
+        controlPersis.modificarProductos(prod);
+    }    
 }

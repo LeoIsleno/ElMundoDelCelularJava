@@ -125,6 +125,11 @@ public class ControladoraPersistencia {
         }
     }
     
+    //Trae todo el listado de ventas de celulares
+    public List<Productos> traerTodosProductos() {
+        return productoJPA.findProductosEntities();
+    }
+    
 
 
 }

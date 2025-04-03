@@ -14,27 +14,19 @@ public class Productos implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private String Codigo;
-    private String Fecha;
     private String Categoria;
-    private String Descripcion;
     private int Costo;
-    private int EnStock;
     private int PrecioUnitario;
-    private int Inversion;
 
     public Productos() {
     }
 
-    public Productos(int id, String Codigo, String Fecha, String Categoria, String Descripcion, int Costo, int EnStock, int PrecioUnitario, int Inversion) {
+    public Productos(int id, String Codigo, String Categoria, int Costo, int PrecioUnitario) {
         this.id = id;
         this.Codigo = Codigo;
-        this.Fecha = Fecha;
         this.Categoria = Categoria;
-        this.Descripcion = Descripcion;
         this.Costo = Costo;
-        this.EnStock = EnStock;
         this.PrecioUnitario = PrecioUnitario;
-        this.Inversion = Inversion;
     }
 
     public int getId() {
@@ -53,28 +45,12 @@ public class Productos implements Serializable {
         this.Codigo = Codigo;
     }
 
-    public String getFecha() {
-        return Fecha;
-    }
-
-    public void setFecha(String Fecha) {
-        this.Fecha = Fecha;
-    }
-
     public String getCategoria() {
         return Categoria;
     }
 
     public void setCategoria(String Categoria) {
         this.Categoria = Categoria;
-    }
-
-    public String getDescripcion() {
-        return Descripcion;
-    }
-
-    public void setDescripcion(String Descripcion) {
-        this.Descripcion = Descripcion;
     }
 
     public int getCosto() {
@@ -85,14 +61,6 @@ public class Productos implements Serializable {
         this.Costo = Costo;
     }
 
-    public int getEnStock() {
-        return EnStock;
-    }
-
-    public void setEnStock(int EnStock) {
-        this.EnStock = EnStock;
-    }
-
     public int getPrecioUnitario() {
         return PrecioUnitario;
     }
@@ -101,18 +69,5 @@ public class Productos implements Serializable {
         this.PrecioUnitario = PrecioUnitario;
     }
 
-    public int getInversion() {
-        return Inversion;
-    }
-
-    public void setInversion(int Inversion) {
-        this.Inversion = Inversion;
-    }
-    
-    
-    
-    
-    
-    
     
 }
