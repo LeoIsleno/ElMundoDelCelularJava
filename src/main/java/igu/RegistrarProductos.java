@@ -573,8 +573,8 @@ public class RegistrarProductos extends JInternalFrame {
                 //Eliminamos el producto
                 control.EliminarProducto(id_Producto);
 
-                // Mensaje de alerta: tabla vacía
-                Utilidades.MostrarMensaje(mensajeEliminacion, mensajeInfo, tituloEliminar);
+                // Mensaje de eliminacion
+                Utilidades.MostrarMensaje("Se elimino un producto", mensajeInfo, tituloEliminar);
 
             } else {
                 // Mensaje de alerta: no se seleccionó ninguna fila

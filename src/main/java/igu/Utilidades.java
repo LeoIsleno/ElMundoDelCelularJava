@@ -52,7 +52,7 @@ public class Utilidades {
         dialog.setAlwaysOnTop(true);
     }
 
-        public static void crearReciboVenta(List<VentasCelulares> listaVentas, Celulares cel) throws IOException {
+    public static void crearReciboVenta(List<VentasCelulares> listaVentas, Celulares cel) throws IOException {
 
         LocalDate currentDate = getCurrentDate();
 
@@ -204,5 +204,5 @@ public class Utilidades {
             System.out.println("No se encontraron archivos PDF en el directorio especificado.");
         }
     }
-
+    
 }
