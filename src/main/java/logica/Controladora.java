@@ -49,7 +49,7 @@ public class Controladora {
     }
 
     //Ventas
-    public void registrarVenta(LocalDate fechaActual, String nombreCliente, String numTelefono, String userResponsable, String formaPago, Celulares cel, String valorDejado, String detalles) {
+    public void registrarVenta(LocalDate fechaActual, String nombreCliente, String numTelefono, String userResponsable, String formaPago, Celulares cel, String valorDejado, String detalles, String incluyeFunda, String incluyeVidrio, String incluyeCargador) {
 
         VentasCelulares venta = new VentasCelulares();
 
@@ -61,7 +61,9 @@ public class Controladora {
         venta.setFormaPago(formaPago);
         venta.setDetalles(detalles);
         venta.setValorDejado(valorDejado);
-
+        venta.setFunda(incluyeFunda);
+        venta.setVidrio(incluyeVidrio);
+        venta.setCargador(incluyeCargador);
         cel.setEstado("Vendido");
 
         controlPersis.modificarCelular(cel);

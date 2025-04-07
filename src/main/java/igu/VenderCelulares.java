@@ -462,6 +462,20 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
             Usuarios usuarioActual = UsuarioSingleton.getInstance();
             String detalles = "No se registro detalles en el equipo.";
             String valorDejado = "0";
+            String incluyeFunda = "NO";
+            String incluyeVidrio = "NO";
+            String incluyeCargador = "NO";
+
+            if (flagIncluyeCargador) {
+                incluyeCargador = "SI";
+            }
+
+            if (flagIncluyeVidrio) {
+                incluyeVidrio = "SI";
+            }
+            if (flagIncluyeFunda) {
+                incluyeFunda = "SI";
+            }
 
             if (chbox_detalles.isSelected()) {
                 detalles = txt_detalles.getText();
@@ -479,7 +493,7 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
 
                 //Enviamos al a controladora los datos a subir a la BD
                 control.registrarVenta(fechaActual, nombreCliente, numTelefono, usuarioActual.getNombreVendedor(),
-                        formaPago, this.cel, valorDejado, detalles);
+                        formaPago, this.cel, valorDejado, detalles, incluyeFunda, incluyeVidrio, incluyeCargador);
 
                 // Eliminan todo los campos
                 limpiarCampos();

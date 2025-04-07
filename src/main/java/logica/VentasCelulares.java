@@ -29,6 +29,9 @@ public class VentasCelulares implements Serializable {
     private String formaPago;
     private String valorDejado;
     private String detalles;
+    private String funda;
+    private String vidrio;
+    private String cargador;
 
     
     @OneToOne
@@ -37,7 +40,7 @@ public class VentasCelulares implements Serializable {
     public VentasCelulares() {
     }
 
-    public VentasCelulares(int id, Date fechaVenta, String nombreCliente, String numeroCliente, String responsable, String formaPago, String valorDejado, String detalles, Celulares celular) {
+    public VentasCelulares(int id, Date fechaVenta, String nombreCliente, String numeroCliente, String responsable, String formaPago, String valorDejado, String detalles, String funda, String vidrio, String cargador, Celulares celular) {
         this.id = id;
         this.fechaVenta = fechaVenta;
         this.nombreCliente = nombreCliente;
@@ -46,8 +49,37 @@ public class VentasCelulares implements Serializable {
         this.formaPago = formaPago;
         this.valorDejado = valorDejado;
         this.detalles = detalles;
+        this.funda = funda;
+        this.vidrio = vidrio;
+        this.cargador = cargador;
         this.celular = celular;
     }
+
+    public String getFunda() {
+        return funda;
+    }
+
+    public void setFunda(String funda) {
+        this.funda = funda;
+    }
+
+    public String getVidrio() {
+        return vidrio;
+    }
+
+    public void setVidrio(String vidrio) {
+        this.vidrio = vidrio;
+    }
+
+    public String getCargador() {
+        return cargador;
+    }
+
+    public void setCargador(String cargador) {
+        this.cargador = cargador;
+    }
+
+    
 
     public String getValorDejado() {
         return valorDejado;
