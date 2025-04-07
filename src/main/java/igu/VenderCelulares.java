@@ -24,7 +24,7 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
 
     Controladora control = null;
     Celulares cel;
-    
+
     boolean flagIncluyeCargador = false;
     boolean flagIncluyeFunda = false;
     boolean flagIncluyeVidrio = false;
@@ -356,15 +356,27 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_chbox_dejaValorActionPerformed
 
     private void chbox_IncCargActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbox_IncCargActionPerformed
-        // TODO add your handling code here:
+        if (chbox_IncCarg.isSelected()) {
+            flagIncluyeCargador = true;
+        } else {
+            flagIncluyeCargador = true;
+        }
     }//GEN-LAST:event_chbox_IncCargActionPerformed
 
     private void chbox_IncVidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbox_IncVidActionPerformed
-        // TODO add your handling code here:
+        if (chbox_IncVid.isSelected()) {
+            flagIncluyeVidrio = true;
+        } else {
+            flagIncluyeVidrio = true;
+        }
     }//GEN-LAST:event_chbox_IncVidActionPerformed
 
     private void chbox_IncFundaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbox_IncFundaActionPerformed
-        // TODO add your handling code here:
+        if (chbox_IncFunda.isSelected()) {
+            flagIncluyeFunda = true;
+        } else {
+            flagIncluyeFunda = true;
+        }
     }//GEN-LAST:event_chbox_IncFundaActionPerformed
 
     //Inicializamos la tabla con sus datos
@@ -537,7 +549,7 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
         List registroCelularesVendidos = control.traerRegistrosVentas();
 
         try {
-            Utilidades.crearReciboVenta(registroCelularesVendidos, this.cel);
+            Utilidades.crearReciboVenta(registroCelularesVendidos, this.cel, flagIncluyeCargador, flagIncluyeFunda, flagIncluyeVidrio);
 
             // Imprimir el último PDF generado
             Utilidades.imprimirUltimoPDFGenerado("C:\\Users\\fabian\\Documents\\Mi Gestion App - Java\\Remitos Venta Celulares"); // Especifica la ruta de tu directorio de archivos PDF

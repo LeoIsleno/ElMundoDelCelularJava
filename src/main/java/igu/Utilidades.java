@@ -5,6 +5,8 @@ import com.itextpdf.kernel.color.WebColors;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.canvas.draw.ILineDrawer;
 import com.itextpdf.layout.Document;
@@ -52,7 +54,7 @@ public class Utilidades {
         dialog.setAlwaysOnTop(true);
     }
 
-    public static void crearReciboVenta(List<VentasCelulares> listaVentas, Celulares cel) throws IOException {
+    public static void crearReciboVenta(List<VentasCelulares> listaVentas, Celulares cel, boolean flagIncluyeCargador, boolean flagIncluyeFunda, boolean flagIncluyeVidrio) throws IOException {
 
         LocalDate currentDate = getCurrentDate();
 
@@ -61,13 +63,16 @@ public class Utilidades {
         // Seteamos el numero de remito con la ID asociada
         String numRemito = String.valueOf(ventaNueva.getId());
 
-        // Especificar la carpeta donde guardar los archivos PDF
-        String folderPath = "C:\\Users\\fabian\\Documents\\Mi Gestion App - Java\\Remitos Venta Celulares";
+        // Usar ruta relativa para la carpeta de recibos
+        String folderPath = "Recibos";  // Esto es relativo al directorio del proyecto
+        Path path = Paths.get(folderPath);
+
         // Crear la carpeta si no existe
-        File directory = new File(folderPath);
-        if (!directory.exists()) {
-            directory.mkdirs();
+        if (!path.toFile().exists()) {
+            path.toFile().mkdirs();  // Crea la carpeta Recibos si no existe
         }
+
+        // Definir la ruta completa del archivo PDF
         String dest = folderPath + "\\Venta_N_" + numRemito + ".pdf";
 
         try {
@@ -149,6 +154,20 @@ public class Utilidades {
 
                 document.add(new Paragraph("Detalles: " + ventaNueva.getDetalles()).setFontSize(10));
                 document.add(new Paragraph("Se toma por parte de pago la cantidad de $: " + ventaNueva.getValorDejado()).setFontSize(10));
+
+                if (flagIncluyeCargador || flagIncluyeVidrio || flagIncluyeFunda) {
+                    document.add(new Paragraph("Con la compra se incluye lo/s accesorio/s:").setFontSize(10));
+                    if (flagIncluyeCargador) {
+                        document.add(new Paragraph("Cargador acorde a stock").setFontSize(10));
+                    }
+                    if (flagIncluyeVidrio) {
+                        document.add(new Paragraph("Vidrio templado acorde al modelo del celular").setFontSize(10));
+                    }
+                    if (flagIncluyeFunda) {
+                        document.add(new Paragraph("Funda acorde al modelo del celular").setFontSize(10));
+                    }
+                }
+
                 document.add(new Paragraph("TOTAL A COBRAR: $" + cel.getPrecio()).setFontSize(15).setBold().setTextAlignment(TextAlignment.RIGHT));
             }
             System.out.println("PDF creado exitosamente en " + dest);
@@ -204,5 +223,5 @@ public class Utilidades {
             System.out.println("No se encontraron archivos PDF en el directorio especificado.");
         }
     }
-    
+
 }
