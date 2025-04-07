@@ -359,7 +359,7 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
         if (chbox_IncCarg.isSelected()) {
             flagIncluyeCargador = true;
         } else {
-            flagIncluyeCargador = true;
+            flagIncluyeCargador = false;
         }
     }//GEN-LAST:event_chbox_IncCargActionPerformed
 
@@ -367,7 +367,7 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
         if (chbox_IncVid.isSelected()) {
             flagIncluyeVidrio = true;
         } else {
-            flagIncluyeVidrio = true;
+            flagIncluyeVidrio = false;
         }
     }//GEN-LAST:event_chbox_IncVidActionPerformed
 
@@ -375,7 +375,7 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
         if (chbox_IncFunda.isSelected()) {
             flagIncluyeFunda = true;
         } else {
-            flagIncluyeFunda = true;
+            flagIncluyeFunda = false;
         }
     }//GEN-LAST:event_chbox_IncFundaActionPerformed
 

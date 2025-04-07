@@ -152,19 +152,19 @@ public class Utilidades {
                 document.add(tableVentaCel);
                 document.add(new Paragraph("\n"));
 
-                document.add(new Paragraph("Detalles: " + ventaNueva.getDetalles()).setFontSize(10));
-                document.add(new Paragraph("Se toma por parte de pago la cantidad de $: " + ventaNueva.getValorDejado()).setFontSize(10));
+                document.add(new Paragraph("Detalles: " + ventaNueva.getDetalles()).setFontSize(8));
+                document.add(new Paragraph("Se toma por parte de pago la cantidad de $: " + ventaNueva.getValorDejado()).setFontSize(8));
 
                 if (flagIncluyeCargador || flagIncluyeVidrio || flagIncluyeFunda) {
-                    document.add(new Paragraph("Con la compra se incluye lo/s accesorio/s:").setFontSize(10));
+                    document.add(new Paragraph("Con la compra se incluye lo/s accesorio/s:").setFontSize(8));
                     if (flagIncluyeCargador) {
-                        document.add(new Paragraph("Cargador acorde a stock").setFontSize(10));
+                        document.add(new Paragraph("    Cargador acorde a stock").setFontSize(8));
                     }
                     if (flagIncluyeVidrio) {
-                        document.add(new Paragraph("Vidrio templado acorde al modelo del celular").setFontSize(10));
+                        document.add(new Paragraph("    Vidrio templado acorde al modelo del celular").setFontSize(8));
                     }
                     if (flagIncluyeFunda) {
-                        document.add(new Paragraph("Funda acorde al modelo del celular").setFontSize(10));
+                        document.add(new Paragraph("    Funda acorde al modelo del celular").setFontSize(8));
                     }
                 }
 
