@@ -227,21 +227,34 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel10" min="-2" pref="96" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="txt_TraDiaAcc" min="-2" pref="74" max="-2" attributes="0"/>
+                              <Component id="jLabel12" min="-2" pref="96" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="txt_CargAcc" min="-2" pref="74" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel12" min="-2" pref="96" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="txt_TarjDiaAcc" min="-2" pref="74" max="-2" attributes="0"/>
+                              <Component id="jLabel10" min="-2" pref="96" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="txt_FundasAcc" min="-2" pref="74" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel11" min="-2" pref="96" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="txt_EfecDiaAcc" min="-2" pref="74" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="txt_VidriosAcc" min="-2" pref="74" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txt_CargPrecio" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
+                          <Component id="txt_FundasPrecio" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
+                          <Component id="txt_VidriosPrecio" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txt_CargPrecioTot" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
+                          <Component id="txt_FundasPrecioTot" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
+                          <Component id="txt_VidriosPrecioTot" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="18" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -249,21 +262,39 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_TraDiaAcc" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_EfecDiaAcc" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txt_TarjDiaAcc" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="txt_FundasPrecioTot" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="txt_VidriosPrecioTot" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="txt_CargPrecioTot" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="txt_FundasPrecio" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="txt_VidriosPrecio" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="txt_CargPrecio" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_FundasAcc" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_VidriosAcc" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_CargAcc" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="16" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -271,30 +302,60 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Transferencias"/>
+                <Property name="text" type="java.lang.String" value="Fundas"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Efectivo"/>
+                <Property name="text" type="java.lang.String" value="Vidrios"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel12">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Tarjeta"/>
+                <Property name="text" type="java.lang.String" value="Cargadores"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="txt_TarjDiaAcc">
+            <Component class="javax.swing.JLabel" name="txt_CargAcc">
               <Properties>
                 <Property name="text" type="java.lang.String" value="######"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="txt_EfecDiaAcc">
+            <Component class="javax.swing.JLabel" name="txt_VidriosAcc">
               <Properties>
                 <Property name="text" type="java.lang.String" value="######"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="txt_TraDiaAcc">
+            <Component class="javax.swing.JLabel" name="txt_FundasAcc">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="######"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="txt_FundasPrecio">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="######"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="txt_VidriosPrecio">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="######"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="txt_CargPrecio">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="######"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="txt_FundasPrecioTot">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="######"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="txt_VidriosPrecioTot">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="######"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="txt_CargPrecioTot">
               <Properties>
                 <Property name="text" type="java.lang.String" value="######"/>
               </Properties>
