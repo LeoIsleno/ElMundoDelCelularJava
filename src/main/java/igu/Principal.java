@@ -33,7 +33,7 @@ public class Principal extends javax.swing.JFrame {
         btn_Producto = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        btn_Productos = new javax.swing.JMenuItem();
         btnMenu_Estadisticas = new javax.swing.JMenu();
         btn_estadisticasGeneral = new javax.swing.JMenuItem();
 
@@ -95,8 +95,13 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem1);
 
-        jMenuItem3.setText("Productos");
-        jMenu2.add(jMenuItem3);
+        btn_Productos.setText("Productos");
+        btn_Productos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ProductosActionPerformed(evt);
+            }
+        });
+        jMenu2.add(btn_Productos);
 
         jMenuBar1.add(jMenu2);
 
@@ -180,23 +185,39 @@ public class Principal extends javax.swing.JFrame {
 
     private void btn_ProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProductoActionPerformed
         if (internalFrame == null || !internalFrame.isDisplayable()) {
-        // Si no hay una instancia abierta o está cerrada, crea una nueva instancia
-        internalFrame = new RegistrarProductos();
-        VentanaPrincipal.add(internalFrame);
-    }
-    // Trae el InternalFrame existente al frente
-    internalFrame.setVisible(true);
-    try {
-        internalFrame.setSelected(true);
-    } catch (java.beans.PropertyVetoException e) {
-        // Manejar excepciones si es necesario
-    }
+            // Si no hay una instancia abierta o está cerrada, crea una nueva instancia
+            internalFrame = new RegistrarProductos();
+            VentanaPrincipal.add(internalFrame);
+        }
+        // Trae el InternalFrame existente al frente
+        internalFrame.setVisible(true);
+        try {
+            internalFrame.setSelected(true);
+        } catch (java.beans.PropertyVetoException e) {
+            // Manejar excepciones si es necesario
+        }
     }//GEN-LAST:event_btn_ProductoActionPerformed
+
+    private void btn_ProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProductosActionPerformed
+       if (internalFrame == null || internalFrame.isClosed()) {
+            // Si no hay una instancia abierta o está cerrada, crea una nueva instancia
+            internalFrame = new VenderProductos();
+            VentanaPrincipal.add(internalFrame);
+        }
+        // Trae el InternalFrame existente al frente
+        internalFrame.setVisible(true);
+        try {
+            internalFrame.setSelected(true);
+        } catch (java.beans.PropertyVetoException e) {
+            // Manejar excepciones si es necesario
+        }
+    }//GEN-LAST:event_btn_ProductosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane VentanaPrincipal;
     private javax.swing.JMenu btnMenu_Estadisticas;
     private javax.swing.JMenuItem btn_Producto;
+    private javax.swing.JMenuItem btn_Productos;
     private javax.swing.JMenuItem btn_Registrar_Celular;
     private javax.swing.JMenuItem btn_estadisticasGeneral;
     private javax.swing.JMenu btn_registrar_equipo;
@@ -205,7 +226,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem3;
     // End of variables declaration//GEN-END:variables
 
     private void setPermision() {

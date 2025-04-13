@@ -123,6 +123,7 @@ public class Login extends javax.swing.JFrame {
 
     private void btn_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresarActionPerformed
         // TODO add your handling code here:
+      
         initLogin();
     }//GEN-LAST:event_btn_ingresarActionPerformed
 

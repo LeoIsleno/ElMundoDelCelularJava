@@ -85,14 +85,16 @@ public class Controladora {
     }
 
     //Productos de Celulares
-    public void registrarProducto(String codigo, String categoria, int costo, int precioUnitario) {
+    public void registrarProducto(String codigo, String categoria, int costo, int precioUnitario, int stock, String nombre) {
         Productos prod = new Productos();
 
         prod.setCodigo(codigo);
         prod.setCategoria(categoria);
         prod.setCosto(costo);
         prod.setPrecioUnitario(precioUnitario);
-        
+        prod.setStock(stock);
+        prod.setNombre(nombre);
+
         controlPersis.guardarProducto(prod);
     }
 
@@ -115,7 +117,7 @@ public class Controladora {
         prod.setCategoria(categoria);
         prod.setCosto(costo);
         prod.setPrecioUnitario(precioUnitario);
-        */
+         */
         controlPersis.modificarProductos(prod);
-    }    
+    }
 }

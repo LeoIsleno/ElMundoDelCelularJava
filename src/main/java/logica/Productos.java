@@ -6,9 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
 @Entity
 public class Productos implements Serializable {
+
     @Id
     //Autoincrementa ID
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -17,16 +17,36 @@ public class Productos implements Serializable {
     private String Categoria;
     private int Costo;
     private int PrecioUnitario;
+    private int stock;
+    private String nombre;
 
     public Productos() {
     }
 
-    public Productos(int id, String Codigo, String Categoria, int Costo, int PrecioUnitario) {
+    public Productos(int id, String Codigo, String Categoria, int Costo, int PrecioUnitario, int stock, String nombre) {
         this.id = id;
         this.Codigo = Codigo;
         this.Categoria = Categoria;
         this.Costo = Costo;
         this.PrecioUnitario = PrecioUnitario;
+        this.stock = stock;
+        this.nombre = nombre;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public int getId() {
@@ -69,5 +89,4 @@ public class Productos implements Serializable {
         this.PrecioUnitario = PrecioUnitario;
     }
 
-    
 }

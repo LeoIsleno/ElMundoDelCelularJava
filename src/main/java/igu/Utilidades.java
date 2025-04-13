@@ -81,7 +81,7 @@ public class Utilidades {
             // Crear la tabla para el encabezado
             try (Document document = new Document(pdf)) {
                 // Crear la tabla para el encabezado
-                float[] columnWidths = {1, 3};
+                float[] columnWidths = {2, 2};
                 Table table = new Table(UnitValue.createPercentArray(columnWidths));
                 table.setWidth(UnitValue.createPercentValue(100));
 
@@ -167,6 +167,8 @@ public class Utilidades {
                         document.add(new Paragraph("    Funda acorde al modelo del celular").setFontSize(8));
                     }
                 }
+
+                document.add(new Paragraph("El equipo cuenta con 30 días de garantía a partir de la fecha de entrega, cubriendo únicamente fallas de funcionamiento. Quedan excluidos daños ocasionados por golpes, humedad o mal uso.").setFontSize(10).setBold());
 
                 document.add(new Paragraph("TOTAL A COBRAR: $" + cel.getPrecio()).setFontSize(15).setBold().setTextAlignment(TextAlignment.RIGHT));
             }
