@@ -306,7 +306,7 @@
                           <Component id="btn_Editar" alignment="0" max="32767" attributes="0"/>
                           <Component id="btn_Eliminar" alignment="0" max="32767" attributes="0"/>
                           <Component id="btn_Limpiar" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btn_Limpiar1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btn_AggStock" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="12" max="32767" attributes="0"/>
                   </Group>
@@ -324,7 +324,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btn_Limpiar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btn_Limpiar1" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_AggStock" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -363,12 +363,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_LimpiarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btn_Limpiar1">
+            <Component class="javax.swing.JButton" name="btn_AggStock">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Agregar Stock"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_Limpiar1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_AggStockActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
