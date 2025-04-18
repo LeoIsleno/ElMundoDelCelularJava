@@ -100,7 +100,7 @@ public class ControladoraPersistencia {
         productoJPA.create(producto);
     }
 
-    //Trae todo el listado de ventas de celulares
+    //Trae todo el listado de productos
     public List<Productos> traerProductos() {
         return productoJPA.findProductosEntities();
     }

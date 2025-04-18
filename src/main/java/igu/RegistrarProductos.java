@@ -417,7 +417,6 @@ public class RegistrarProductos extends JInternalFrame {
         } else {
             registrarNuevoProducto();
         }
-
         setBotonesFalse();
         setFuncionesTrue();
     }//GEN-LAST:event_btn_AceptarActionPerformed

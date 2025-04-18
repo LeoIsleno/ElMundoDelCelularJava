@@ -120,4 +120,23 @@ public class Controladora {
          */
         controlPersis.modificarProductos(prod);
     }
+
+    public Productos buscarProductoCodigo(String cod) {
+
+        List<Productos> list = traerProductos();
+
+        for (int i = 0; i < list.size(); i++) {
+            
+            Productos prod = list.get(i);
+            
+
+            if (prod.getCodigo().equals(cod)) {
+                System.out.println("Producto encontrado: " + prod.getNombre());
+                return list.get(i);
+            }
+        }
+
+        return null; // Por si no se encuentra ningún producto
+    }
+
 }

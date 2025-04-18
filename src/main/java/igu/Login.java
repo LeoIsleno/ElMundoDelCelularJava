@@ -17,6 +17,11 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         control = new Controladora();
         
+        //Borrar
+        txt_user.setText("Jefe"); 
+        txt_pass.setText("Belgrano4274");
+        
+        
         this.setBackground(new Color(23, 33, 43));
         setLocationRelativeTo(null);
         setResizable(false);
