@@ -4,29 +4,53 @@
  */
 package igu;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.metamodel.SingularAttribute;
+import javax.swing.ButtonGroup;
+import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 import logica.Celulares;
 import logica.Controladora;
 import logica.Productos;
+import logica.UsuarioSingleton;
+import logica.Usuarios;
 
 public class VenderProductos extends javax.swing.JInternalFrame {
+    //Textos
+
+    String mensajeInfo = "Info";
+    String mensajeError = "Error";
+    String vacio = "No hay nada en su tabla";
+    String campoVacio = "No se ha insertado ningun codigo";
+    String itemNoSeleccionado = "No seleccionó ningún ítem";
+    String mensajeEliminacion = "Se eliminó el celular";
+    String mensajeEditado = "Se Edito el Producto";
+    String tituloEliminar = "Eliminar";
+    String Alerta = "Alerta";
 
     //Variables 
     Controladora control = null;
     Productos prod;
-    Boolean flagEdicion = false;
 
     private List<Productos> productosSeleccionados = new ArrayList<>();
+    ButtonGroup grupoPago = new ButtonGroup();
 
     public VenderProductos() {
         initComponents();
-
+        //Seteamos los titulos de la tabla
         initTitulosTabla();
 
+        grupoPago.add(select_efectivo);
+        grupoPago.add(select_tarjeta);
+        grupoPago.add(select_transferencia);
+
         control = new Controladora();
+
+        //Cerrar el JFrame
+        setClosable(true);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     @SuppressWarnings("unchecked")
@@ -51,7 +75,11 @@ public class VenderProductos extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        laberl_total = new javax.swing.JLabel();
+        label_total = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        select_efectivo = new javax.swing.JRadioButton();
+        select_transferencia = new javax.swing.JRadioButton();
+        select_tarjeta = new javax.swing.JRadioButton();
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setFocusCycleRoot(true);
@@ -97,19 +125,24 @@ public class VenderProductos extends javax.swing.JInternalFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
                     .addComponent(btn_buscar)
-                    .addComponent(txt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Funciones"));
 
         btn_eliminarproducto.setText("Eliminar Producto");
+        btn_eliminarproducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminarproductoActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("TOTAL");
 
@@ -140,11 +173,21 @@ public class VenderProductos extends javax.swing.JInternalFrame {
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btn_regVenta.setText("Registrar Venta");
+        btn_regVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_regVentaActionPerformed(evt);
+            }
+        });
 
         btn_Cancelar.setText("Cancelar Venta");
+        btn_Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CancelarActionPerformed(evt);
+            }
+        });
 
         label_articulos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        label_articulos.setText("001");
+        label_articulos.setText("#");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel3.setText("ARTICULOS");
@@ -176,8 +219,8 @@ public class VenderProductos extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel5.setText("TOTAL");
 
-        laberl_total.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        laberl_total.setText("001");
+        label_total.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        label_total.setText("#");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -190,7 +233,7 @@ public class VenderProductos extends javax.swing.JInternalFrame {
                         .addComponent(jLabel5))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(laberl_total)))
+                        .addComponent(label_total)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -199,7 +242,7 @@ public class VenderProductos extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
-                .addComponent(laberl_total)
+                .addComponent(label_total)
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -234,6 +277,37 @@ public class VenderProductos extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Forma de Pago"));
+
+        select_efectivo.setText("Efectivo");
+
+        select_transferencia.setText("Transferencia");
+
+        select_tarjeta.setText("Tarjeta");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(select_tarjeta)
+                    .addComponent(select_transferencia)
+                    .addComponent(select_efectivo))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(select_efectivo)
+                .addGap(18, 18, 18)
+                .addComponent(select_transferencia)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(select_tarjeta))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -241,10 +315,11 @@ public class VenderProductos extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -252,12 +327,12 @@ public class VenderProductos extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -279,10 +354,22 @@ public class VenderProductos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
-
         buscarProductoCB();
-
+        actualizarLabelsDesdeArray(productosSeleccionados, label_articulos, label_total);
     }//GEN-LAST:event_btn_buscarActionPerformed
+
+    private void btn_eliminarproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarproductoActionPerformed
+        eliminarProducto();
+        actualizarLabelsDesdeArray(productosSeleccionados, label_articulos, label_total);
+    }//GEN-LAST:event_btn_eliminarproductoActionPerformed
+
+    private void btn_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancelarActionPerformed
+        cancelarVenta();
+    }//GEN-LAST:event_btn_CancelarActionPerformed
+
+    private void btn_regVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regVentaActionPerformed
+        registrarVentaProductos();
+    }//GEN-LAST:event_btn_regVentaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Cancelar;
@@ -299,9 +386,13 @@ public class VenderProductos extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label_articulos;
-    private javax.swing.JLabel laberl_total;
+    private javax.swing.JLabel label_total;
+    private javax.swing.JRadioButton select_efectivo;
+    private javax.swing.JRadioButton select_tarjeta;
+    private javax.swing.JRadioButton select_transferencia;
     private javax.swing.JTable table_ventaProductos;
     private javax.swing.JTextField txt_buscar;
     // End of variables declaration//GEN-END:variables
@@ -341,9 +432,115 @@ public class VenderProductos extends javax.swing.JInternalFrame {
             };
             modeloTabla.addRow(objProductos);
 
+            //Añadimos el producto al array
+            productosSeleccionados.add(prod);
+
             // Actualizar la tabla
             table_ventaProductos.setModel(modeloTabla);
+            txt_buscar.setText("");
         }
+    }
+
+    private void eliminarProducto() {
+        // Verificar si la tabla no está vacía
+        if (table_ventaProductos.getRowCount() > 0) {
+            // Verificar si se ha seleccionado una fila
+            if (table_ventaProductos.getSelectedRow() != -1) {
+                // Obtenemos el código del producto seleccionado
+                String codigo = String.valueOf(table_ventaProductos.getValueAt(table_ventaProductos.getSelectedRow(), 0));
+
+                // Buscar y eliminar el producto con el código del array productosSeleccionados
+                for (int i = 0; i < productosSeleccionados.size(); i++) {
+                    if (productosSeleccionados.get(i).getCodigo().equals(codigo)) {
+                        // Eliminar el producto del array
+                        productosSeleccionados.remove(i);
+                        break; // Romper el bucle una vez encontrado y eliminado
+                    }
+                }
+
+                // Actualizamos la tabla después de eliminar el producto
+                cargarTabla();
+
+            } else {
+                // Mensaje de alerta: no se seleccionó ninguna fila
+                Utilidades.MostrarMensaje("No se ha seleccionado ningún producto", "Información", "Alerta");
+            }
+        } else {
+            // Mensaje de alerta: tabla vacía
+            Utilidades.MostrarMensaje("La tabla está vacía", "Información", "Alerta");
+        }
+    }
+
+    private void cargarTabla() {
+        // Limpiar la tabla antes de cargarla de nuevo
+        DefaultTableModel model = (DefaultTableModel) table_ventaProductos.getModel();
+        model.setRowCount(0); // Esto elimina todas las filas existentes de la tabla
+
+        // Iterar sobre los productos seleccionados y agregar cada uno a la tabla
+        for (Productos producto : productosSeleccionados) {
+            // Suponiendo que el Producto tiene un método que devuelve los valores para cada columna
+            Object[] row = new Object[]{
+                producto.getCodigo(),
+                producto.getNombre(),
+                producto.getCategoria(),
+                producto.getPrecioUnitario()
+            };
+            model.addRow(row); // Agrega la fila con los valores del producto
+        }
+    }
+
+    private void cancelarVenta() {
+        // Limpiar la lista de productos seleccionados
+        productosSeleccionados.clear();
+
+        // Llamar al método para actualizar la tabla (vaciarla)
+        cargarTabla();
+    }
+
+    private void registrarVentaProductos() {
+        // Validar que haya productos
+        if (productosSeleccionados == null || productosSeleccionados.isEmpty()) {
+            Utilidades.MostrarMensaje("No hay productos en la tabla.", "Información", "Alerta");
+            return;
+        }
+
+        // Validar que se haya seleccionado una forma de pago
+        String formaDePago = null;
+
+        if (select_efectivo.isSelected()) {
+            formaDePago = "Efectivo";
+        } else if (select_transferencia.isSelected()) {
+            formaDePago = "Transferencia";
+        } else if (select_tarjeta.isSelected()) {
+            formaDePago = "Tarjeta";
+        }
+
+        if (formaDePago == null) {
+            Utilidades.MostrarMensaje("Debe seleccionar una forma de pago.", "Información", "Alerta");
+            return;
+        }
+
+        // Registrar la venta
+        Usuarios usuarioActual = UsuarioSingleton.getInstance();
+        LocalDate fechaActual = LocalDate.now();
+
+        control.registrarVentaProductos(usuarioActual.getId(), productosSeleccionados, fechaActual, formaDePago);
+
+        cancelarVenta();
+        grupoPago.clearSelection(); // Asegurate de tener este grupo declarado en tu clase
+
+    }
+
+    public void actualizarLabelsDesdeArray(List<Productos> productosSeleccionados, JLabel label_articulos, JLabel label_total) {
+        int cantidad = productosSeleccionados.size();
+        double total = 0;
+
+        for (Productos prod : productosSeleccionados) {
+            total += prod.getPrecioUnitario();
+        }
+
+        label_articulos.setText(String.valueOf(cantidad));
+        label_total.setText("$" + String.valueOf(total));
     }
 
 }

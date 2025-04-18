@@ -126,9 +126,7 @@ public class Controladora {
         List<Productos> list = traerProductos();
 
         for (int i = 0; i < list.size(); i++) {
-            
             Productos prod = list.get(i);
-            
 
             if (prod.getCodigo().equals(cod)) {
                 System.out.println("Producto encontrado: " + prod.getNombre());
@@ -137,6 +135,28 @@ public class Controladora {
         }
 
         return null; // Por si no se encuentra ningún producto
+    }
+
+    public void registrarVentaProductos(int idUsuario, List<Productos> productosSeleccionados, LocalDate fechaVenta, String formaPago) {
+        // Convertir LocalDate a Date
+        Date date = Date.from(fechaVenta.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        // Crear la venta para cada producto seleccionado
+        for (Productos producto : productosSeleccionados) {
+            // Crear una nueva venta para cada producto
+            VentaProductos venta = new VentaProductos();
+            venta.setFechaVenta(date);  // Usamos la fecha convertida
+            venta.setIdproductos(String.valueOf(producto.getId()));  // Solo el ID del producto
+            venta.setIdUsuario(String.valueOf(idUsuario));
+            venta.setFormaPago(formaPago);
+
+            // Guardar la venta
+            controlPersis.guardarVentaProductos(venta);
+
+            // Actualizar stock de productos
+            producto.setStock(producto.getStock() - 1);  // Reducir stock
+            controlPersis.modificarProductos(producto);  // Actualizar producto en la base de datos
+        }
     }
 
 }

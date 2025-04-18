@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import logica.Celulares;
 import logica.Productos;
 import logica.Usuarios;
+import logica.VentaProductos;
 import logica.VentasCelulares;
 import persistencia.exceptions.NonexistentEntityException;
 
@@ -14,11 +15,10 @@ public class ControladoraPersistencia {
     CelularesJpaController celJPA = new CelularesJpaController();
     VentasCelularesJpaController ventaCelJPA = new VentasCelularesJpaController();
     UsuariosJpaController userJPA = new UsuariosJpaController();
-    
+
     ProductosJpaController productoJPA = new ProductosJpaController();
-    
-    
-    
+    VentaProductosJpaController ventaProductosJPA = new VentaProductosJpaController();
+
     //Celulares
     public void guardarCelular(Celulares cel) {
         //Crear en la BD un registro de celular
@@ -80,22 +80,19 @@ public class ControladoraPersistencia {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
+
     //Usuarios
     public void guardarUsuarior(Usuarios user) {
         //Crear en la BD un registro de celular
         userJPA.create(user);
     }
-    
+
     public List<Usuarios> traerUsuarios() {
         return userJPA.findUsuariosEntities();
     }
-    
-    
-    
+
     //Productos
-     public void guardarProducto(Productos producto) {
+    public void guardarProducto(Productos producto) {
         //Crear en la BD un registro de celular
         productoJPA.create(producto);
     }
@@ -124,12 +121,16 @@ public class ControladoraPersistencia {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     //Trae todo el listado de ventas de celulares
     public List<Productos> traerTodosProductos() {
         return productoJPA.findProductosEntities();
     }
-    
 
+    //Productos
+    public void guardarVentaProductos(VentaProductos ventaProductos) {
+        ventaProductosJPA.create(ventaProductos);
+    }
 
+  
 }

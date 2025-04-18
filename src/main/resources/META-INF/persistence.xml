@@ -6,6 +6,7 @@
     <class>logica.VentasCelulares</class>
     <class>logica.Usuarios</class>
     <class>logica.Productos</class>
+    <class>logica.VentaProductos</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://b0xovu8rg1sjhqe9mmnv-mysql.services.clever-cloud.com:3306/b0xovu8rg1sjhqe9mmnv?serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="u5fmlglld8fjkufw"/>
