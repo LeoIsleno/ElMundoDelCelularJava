@@ -2,6 +2,7 @@ package logica;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import persistencia.ControladoraPersistencia;
@@ -137,26 +138,37 @@ public class Controladora {
         return null; // Por si no se encuentra ningún producto
     }
 
-    public void registrarVentaProductos(int idUsuario, List<Productos> productosSeleccionados, LocalDate fechaVenta, String formaPago) {
+    public void registrarVentaProductos(int idUsuario, List<Productos> productosSeleccionados, LocalDate fechaVenta, String formaPago, String dni) {
         // Convertir LocalDate a Date
         Date date = Date.from(fechaVenta.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
-        // Crear la venta para cada producto seleccionado
+        // Crear una sola venta
+        VentaProductos venta = new VentaProductos();
+        venta.setFechaVenta(date);
+        venta.setIdUsuario(String.valueOf(idUsuario));
+        venta.setFormaPago(formaPago);
+        venta.setDniCliente(dni);
+
+        // Lista para almacenar los detalles de venta
+        List<DetalleVentaProductos> detalles = new ArrayList<>();
+
         for (Productos producto : productosSeleccionados) {
-            // Crear una nueva venta para cada producto
-            VentaProductos venta = new VentaProductos();
-            venta.setFechaVenta(date);  // Usamos la fecha convertida
-            venta.setIdproductos(String.valueOf(producto.getId()));  // Solo el ID del producto
-            venta.setIdUsuario(String.valueOf(idUsuario));
-            venta.setFormaPago(formaPago);
+            DetalleVentaProductos detalle = new DetalleVentaProductos();
+            detalle.setVenta(venta);
+            detalle.setProducto(producto); // Asociar el producto
 
-            // Guardar la venta
-            controlPersis.guardarVentaProductos(venta);
+            detalles.add(detalle);
 
-            // Actualizar stock de productos
-            producto.setStock(producto.getStock() - 1);  // Reducir stock
-            controlPersis.modificarProductos(producto);  // Actualizar producto en la base de datos
+            // Actualizar stock
+            producto.setStock(producto.getStock() - 1);
+            controlPersis.modificarProductos(producto);
         }
+
+        // Asignar los detalles a la venta
+        venta.setDetallesVenta(detalles);
+
+        // Guardar venta (también guarda los detalles por cascade = ALL)
+        controlPersis.guardarVentaProductos(venta);
     }
 
 }

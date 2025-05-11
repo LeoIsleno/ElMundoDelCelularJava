@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.Celulares;
 import logica.Controladora;
@@ -34,19 +35,23 @@ public class VenderProductos extends javax.swing.JInternalFrame {
     Controladora control = null;
     Productos prod;
 
+    boolean flagDni = false;
+
+    // Validar que se haya seleccionado una forma de pago
+    String formaDePago = null;
+
     private List<Productos> productosSeleccionados = new ArrayList<>();
     ButtonGroup grupoPago = new ButtonGroup();
 
     public VenderProductos() {
         initComponents();
+        control = new Controladora();
+
         //Seteamos los titulos de la tabla
         initTitulosTabla();
 
-        grupoPago.add(select_efectivo);
-        grupoPago.add(select_tarjeta);
-        grupoPago.add(select_transferencia);
-
-        control = new Controladora();
+        //Inicializamos los grupos de pago con sus Listeners
+        initGruposPagos();
 
         //Cerrar el JFrame
         setClosable(true);
@@ -80,6 +85,9 @@ public class VenderProductos extends javax.swing.JInternalFrame {
         select_efectivo = new javax.swing.JRadioButton();
         select_transferencia = new javax.swing.JRadioButton();
         select_tarjeta = new javax.swing.JRadioButton();
+        panel_dni = new javax.swing.JPanel();
+        txt_dni = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setFocusCycleRoot(true);
@@ -187,7 +195,7 @@ public class VenderProductos extends javax.swing.JInternalFrame {
         });
 
         label_articulos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        label_articulos.setText("#");
+        label_articulos.setText("0");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel3.setText("ARTICULOS");
@@ -197,30 +205,28 @@ public class VenderProductos extends javax.swing.JInternalFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(label_articulos)))
+                .addGap(54, 54, 54)
+                .addComponent(label_articulos)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(label_articulos)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addComponent(label_articulos))
         );
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel5.setText("TOTAL");
 
         label_total.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        label_total.setText("#");
+        label_total.setText("0");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -239,11 +245,10 @@ public class VenderProductos extends javax.swing.JInternalFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
-                .addComponent(label_total)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addComponent(label_total))
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -255,20 +260,22 @@ public class VenderProductos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_regVenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_Cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 24, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(44, 44, 44)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_regVenta)
@@ -280,8 +287,18 @@ public class VenderProductos extends javax.swing.JInternalFrame {
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Forma de Pago"));
 
         select_efectivo.setText("Efectivo");
+        select_efectivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                select_efectivoActionPerformed(evt);
+            }
+        });
 
         select_transferencia.setText("Transferencia");
+        select_transferencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                select_transferenciaActionPerformed(evt);
+            }
+        });
 
         select_tarjeta.setText("Tarjeta");
 
@@ -308,6 +325,33 @@ public class VenderProductos extends javax.swing.JInternalFrame {
                 .addComponent(select_tarjeta))
         );
 
+        panel_dni.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Cliente"));
+
+        jLabel4.setText("DNI:");
+
+        javax.swing.GroupLayout panel_dniLayout = new javax.swing.GroupLayout(panel_dni);
+        panel_dni.setLayout(panel_dniLayout);
+        panel_dniLayout.setHorizontalGroup(
+            panel_dniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_dniLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panel_dniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_dni)
+                    .addGroup(panel_dniLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        panel_dniLayout.setVerticalGroup(
+            panel_dniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_dniLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txt_dni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -316,24 +360,27 @@ public class VenderProductos extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panel_dni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(panel_dni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -347,7 +394,9 @@ public class VenderProductos extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -371,6 +420,14 @@ public class VenderProductos extends javax.swing.JInternalFrame {
         registrarVentaProductos();
     }//GEN-LAST:event_btn_regVentaActionPerformed
 
+    private void select_transferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_select_transferenciaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_select_transferenciaActionPerformed
+
+    private void select_efectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_select_efectivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_select_efectivoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Cancelar;
     private javax.swing.JButton btn_buscar;
@@ -379,6 +436,7 @@ public class VenderProductos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -390,11 +448,13 @@ public class VenderProductos extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label_articulos;
     private javax.swing.JLabel label_total;
+    private javax.swing.JPanel panel_dni;
     private javax.swing.JRadioButton select_efectivo;
     private javax.swing.JRadioButton select_tarjeta;
     private javax.swing.JRadioButton select_transferencia;
     private javax.swing.JTable table_ventaProductos;
     private javax.swing.JTextField txt_buscar;
+    private javax.swing.JTextField txt_dni;
     // End of variables declaration//GEN-END:variables
 
     private void initTitulosTabla() {
@@ -504,17 +564,6 @@ public class VenderProductos extends javax.swing.JInternalFrame {
             return;
         }
 
-        // Validar que se haya seleccionado una forma de pago
-        String formaDePago = null;
-
-        if (select_efectivo.isSelected()) {
-            formaDePago = "Efectivo";
-        } else if (select_transferencia.isSelected()) {
-            formaDePago = "Transferencia";
-        } else if (select_tarjeta.isSelected()) {
-            formaDePago = "Tarjeta";
-        }
-
         if (formaDePago == null) {
             Utilidades.MostrarMensaje("Debe seleccionar una forma de pago.", "Información", "Alerta");
             return;
@@ -523,12 +572,28 @@ public class VenderProductos extends javax.swing.JInternalFrame {
         // Registrar la venta
         Usuarios usuarioActual = UsuarioSingleton.getInstance();
         LocalDate fechaActual = LocalDate.now();
+        String dniCliente = "null"; // Inicializamos como null por defecto
 
-        control.registrarVentaProductos(usuarioActual.getId(), productosSeleccionados, fechaActual, formaDePago);
+        if (flagDni) {
+            String dni = txt_dni.getText().trim();
+            if (dni.isEmpty()) {
+                Utilidades.MostrarMensaje("Debe ingresar DNI del Cliente.", "Información", "Alerta");
+                return;
+            }
+            if (dni.length() >= 7 && dni.matches("\\d+")) {
+                dniCliente = dni; // Guardamos un DNI válido
+            } else {
+                JOptionPane.showMessageDialog(null, "Ingrese un DNI válido");
+                return;
+            }
+        } else {
+            dniCliente = "null"; // Para pagos en efectivo u otros que no requieran DNI
+        }
 
+        control.registrarVentaProductos(usuarioActual.getId(), productosSeleccionados, fechaActual, formaDePago, dniCliente);
+        Utilidades.MostrarMensaje("Productos Vendidos registrados exitosamente.", "Información", "Exito");
         cancelarVenta();
         grupoPago.clearSelection(); // Asegurate de tener este grupo declarado en tu clase
-
     }
 
     public void actualizarLabelsDesdeArray(List<Productos> productosSeleccionados, JLabel label_articulos, JLabel label_total) {
@@ -541,6 +606,41 @@ public class VenderProductos extends javax.swing.JInternalFrame {
 
         label_articulos.setText(String.valueOf(cantidad));
         label_total.setText("$" + String.valueOf(total));
+    }
+
+    private void initGruposPagos() {
+        grupoPago.add(select_efectivo);
+        grupoPago.add(select_tarjeta);
+        grupoPago.add(select_transferencia);
+
+        select_efectivo.addActionListener(e -> reqDNI());
+        select_tarjeta.addActionListener(e -> reqDNI());
+        select_transferencia.addActionListener(e -> reqDNI());
+
+    }
+
+    private void reqDNI() {
+
+        if (select_efectivo.isSelected()) {
+            formaDePago = "Efectivo";
+            panel_dni.setEnabled(false); // Se desactiva visualmente
+            txt_dni.setEditable(false);
+            txt_dni.setText("");
+            flagDni = false;
+        } else {
+            panel_dni.setEnabled(true); // Se desactiva visualmente
+            txt_dni.setEditable(true);
+
+            if (select_transferencia.isSelected()) {
+                formaDePago = "Transferencia";
+                flagDni = true;
+            }
+
+            if (select_tarjeta.isSelected()) {
+                formaDePago = "Tarjeta";
+                flagDni = true;
+            }
+        }
     }
 
 }
