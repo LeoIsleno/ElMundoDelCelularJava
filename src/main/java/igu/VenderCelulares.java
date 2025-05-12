@@ -1,6 +1,7 @@
 package igu;
 
 import java.awt.print.PrinterException;
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
@@ -41,6 +42,8 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
         //Seteamos los campos no editables
         setCamposNoEditables();
         //setChBoxAdicionales();
+        
+        setInfoCelus();
     }
 
     @SuppressWarnings("unchecked")
@@ -50,6 +53,13 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaCelDisponible = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        txt_cantTelefonos = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txt_costoTotal = new javax.swing.JLabel();
+        txt_precioTotal = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         txt_nombreCliente = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -91,20 +101,69 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
         TablaCelDisponible.setName(""); // NOI18N
         jScrollPane1.setViewportView(TablaCelDisponible);
 
+        jLabel4.setText("Cantidad Telefonos:");
+
+        txt_cantTelefonos.setText("00");
+
+        jLabel6.setText("Costo Total:");
+
+        jLabel7.setText("Precio Total:");
+
+        txt_costoTotal.setText("00");
+
+        txt_precioTotal.setText("00");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(txt_cantTelefonos)
+                .addGap(119, 119, 119)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addComponent(txt_costoTotal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addGap(18, 18, 18)
+                .addComponent(txt_precioTotal)
+                .addGap(4, 4, 4))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txt_cantTelefonos)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(txt_costoTotal)
+                    .addComponent(txt_precioTotal))
+                .addGap(14, 14, 14))
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -277,7 +336,7 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
                 .addComponent(chbox_IncFunda)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(chbox_IncVid)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel46)
                     .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -303,9 +362,9 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -436,19 +495,26 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField txt_NumeroTelefono;
     private javax.swing.JTextField txt_SeleccionCel;
+    private javax.swing.JLabel txt_cantTelefonos;
+    private javax.swing.JLabel txt_costoTotal;
     private javax.swing.JTextArea txt_detalles;
     private javax.swing.JTextField txt_nombreCliente;
     private javax.swing.JTextField txt_precio;
+    private javax.swing.JLabel txt_precioTotal;
     private javax.swing.JTextField txt_valorDejado;
     // End of variables declaration//GEN-END:variables
 
@@ -559,18 +625,40 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
     }
 
     private void crearRemitoPDF() throws PrinterException {
-        //Traer todas las ventas
+        // Traer todas las ventas
         List registroCelularesVendidos = control.traerRegistrosVentas();
 
         try {
+            // Obtener la ruta del directorio del usuario
+            String userHome = System.getProperty("user.home");
+
+            // Crear una carpeta llamada "Recibos Venta Celulares" si no existe
+            String carpetaRecibos = userHome + File.separator + "Recibos Venta Celulares";
+            File directorio = new File(carpetaRecibos);
+            if (!directorio.exists()) {
+                directorio.mkdirs();  // Crear el directorio si no existe
+            }
+
+            // Crear el recibo de venta en la carpeta específica
             Utilidades.crearReciboVenta(registroCelularesVendidos, this.cel, flagIncluyeCargador, flagIncluyeFunda, flagIncluyeVidrio);
 
+            // Obtener el nombre del archivo generado y su ruta completa
+            String archivoPDF = carpetaRecibos + File.separator + "Recibo_Venta_" + this.cel.getId() + ".pdf";  // Agregar un nombre dinámico al archivo
+
             // Imprimir el último PDF generado
-            Utilidades.imprimirUltimoPDFGenerado("C:\\Users\\fabian\\Documents\\Mi Gestion App - Java\\Remitos Venta Celulares"); // Especifica la ruta de tu directorio de archivos PDF
+            Utilidades.imprimirUltimoPDFGenerado(archivoPDF);
+
+            // Mensaje de éxito
+            Utilidades.MostrarMensaje("Recibo de venta creado e impreso correctamente.", "Info", "Éxito");
 
         } catch (IOException ex) {
             Utilidades.MostrarMensaje("No se pudo crear recibo por: " + ex, "Error", "Error al imprimir");
             Logger.getLogger(VenderCelulares.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    private void setInfoCelus() {
+       
+    }
+
 }

@@ -150,7 +150,7 @@ public class Utilidades {
                 document.add(new Paragraph("Detalles de compra:").setFontSize(10));
                 // tabla de informacion
                 document.add(tableVentaCel);
-                document.add(new Paragraph("\n"));
+                //document.add(new Paragraph("\n"));
 
                 document.add(new Paragraph("Detalles: " + ventaNueva.getDetalles()).setFontSize(8));
                 document.add(new Paragraph("Se toma por parte de pago la cantidad de $: " + ventaNueva.getValorDejado()).setFontSize(8));

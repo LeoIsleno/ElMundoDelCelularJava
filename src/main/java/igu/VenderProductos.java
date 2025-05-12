@@ -52,7 +52,8 @@ public class VenderProductos extends javax.swing.JInternalFrame {
 
         //Inicializamos los grupos de pago con sus Listeners
         initGruposPagos();
-
+        
+        
         //Cerrar el JFrame
         setClosable(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);

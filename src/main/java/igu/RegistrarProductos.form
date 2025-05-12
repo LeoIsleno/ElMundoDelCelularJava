@@ -129,7 +129,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel9" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txt_nombnre" min="-2" pref="201" max="-2" attributes="0"/>
+                              <Component id="txt_nombre" min="-2" pref="201" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -161,7 +161,7 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txt_nombnre" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_nombre" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -268,7 +268,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txt_id">
             </Component>
-            <Component class="javax.swing.JTextField" name="txt_nombnre">
+            <Component class="javax.swing.JTextField" name="txt_nombre">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>

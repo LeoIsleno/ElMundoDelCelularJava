@@ -104,7 +104,7 @@ public class RegistrarProductos extends JInternalFrame {
         btn_Cancelar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         txt_id = new javax.swing.JTextField();
-        txt_nombnre = new javax.swing.JTextField();
+        txt_nombre = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txt_stock = new javax.swing.JTextField();
@@ -185,7 +185,7 @@ public class RegistrarProductos extends JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_nombnre, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -209,7 +209,7 @@ public class RegistrarProductos extends JInternalFrame {
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_nombnre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -480,7 +480,7 @@ public class RegistrarProductos extends JInternalFrame {
     private javax.swing.JTextField txt_Precio;
     private javax.swing.JTextField txt_busqueda;
     private javax.swing.JTextField txt_id;
-    private javax.swing.JTextField txt_nombnre;
+    private javax.swing.JTextField txt_nombre;
     private javax.swing.JTextField txt_stock;
     // End of variables declaration//GEN-END:variables
 
@@ -506,7 +506,7 @@ public class RegistrarProductos extends JInternalFrame {
                 txt_id.setText(String.valueOf(prod.getId()));
                 txt_Codigo.setText(prod.getCodigo());
                 comb_Categoria.setSelectedIndex(SeterCategoria(prod.getCategoria()));
-                txt_nombnre.setText(prod.getNombre());
+                txt_nombre.setText(prod.getNombre());
                 txt_Costo.setText(String.valueOf(prod.getCosto()));
                 txt_stock.setText(String.valueOf(prod.getStock()));
                 txt_Precio.setText(String.valueOf(prod.getPrecioUnitario()));
@@ -546,7 +546,7 @@ public class RegistrarProductos extends JInternalFrame {
 
     private void registrarEdicion() {
         prod.setCodigo(txt_Codigo.getText());
-        prod.setNombre(txt_nombnre.getText());
+        prod.setNombre(txt_nombre.getText());
         prod.setStock(Integer.parseInt(txt_stock.getText()));
         prod.setCategoria(comb_Categoria.getSelectedItem().toString());
         prod.setCosto(Integer.parseInt(txt_Costo.getText()));
@@ -568,7 +568,7 @@ public class RegistrarProductos extends JInternalFrame {
         int costo = Integer.parseInt(txt_Costo.getText());
         int precio = Integer.parseInt(txt_Precio.getText());
         int stock = Integer.parseInt(txt_stock.getText());
-        String nombre = txt_nombnre.getText();
+        String nombre = txt_nombre.getText();
 
         if (codigo.equals("") || txt_Costo.getText().trim().equals("")
                 || txt_Precio.getText().trim().equals("") || categoria.equals("-") || txt_stock.getText().trim().equals("") || nombre.equals("")) {
@@ -582,8 +582,6 @@ public class RegistrarProductos extends JInternalFrame {
             //Limpiamos las cajas de texto
             CargarTabla();
         }
-
-        control.registrarProducto(codigo, categoria, costo, precio, stock, nombre);
 
         limpiarCajaTexto();
         setFuncionesTrue();
@@ -620,7 +618,7 @@ public class RegistrarProductos extends JInternalFrame {
         txt_Costo.setText("");
         txt_Precio.setText("");
         txt_stock.setText("");
-        txt_nombnre.setText("");
+        txt_nombre.setText("");
         comb_Categoria.setSelectedIndex(0);
     }
 

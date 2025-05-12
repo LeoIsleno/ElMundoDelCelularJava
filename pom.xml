@@ -34,6 +34,9 @@
                 </executions>
             </plugin>
         </plugins>
+        
+        <!-- Cambia el nombre del archivo JAR generado -->
+        <finalName>MundoDelCelular</finalName> <!-- Aquí cambia el nombre del archivo -->
     </build>
 
    
@@ -50,7 +53,7 @@
             <artifactId>javax.persistence-api</artifactId>
             <version>2.2</version>
         </dependency>
-
+        
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.core</artifactId>
