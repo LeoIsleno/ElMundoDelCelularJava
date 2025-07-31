@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import logica.Celulares;
 import logica.Productos;
+import logica.Reparaciones;
 import logica.Usuarios;
 import logica.VentaProductos;
 import logica.VentasCelulares;
@@ -18,6 +19,8 @@ public class ControladoraPersistencia {
 
     ProductosJpaController productoJPA = new ProductosJpaController();
     VentaProductosJpaController ventaProductosJPA = new VentaProductosJpaController();
+    
+    ReparacionesJpaController reparacionesJPA = new ReparacionesJpaController();
 
     //Celulares
     public void guardarCelular(Celulares cel) {
@@ -131,6 +134,37 @@ public class ControladoraPersistencia {
     public void guardarVentaProductos(VentaProductos ventaProductos) {
         ventaProductosJPA.create(ventaProductos);
     }
+    
+    //Reparaciones de Equipos
+    
+    public void guardarReparacion(Reparaciones rep) {
+        //Crear en la BD un registro de celular
+        reparacionesJPA.create(rep);
+    }
 
+    //Trae todo el listado de celulares
+    public List<Reparaciones> traerReparaciones() {
+        return reparacionesJPA.findReparacionEntities();
+    }
+
+    public void eliminarReparaciones(int rep) {
+        try {
+            reparacionesJPA.destroy(rep);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    } 
+
+    public Reparaciones traerReparacionBuscado(int id_Cel) {
+        return reparacionesJPA.findReparacion(id_Cel);
+    }
+
+    public void modificarReparaciones(Reparaciones rep) {
+        try {
+            reparacionesJPA.edit(rep);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
   
 }

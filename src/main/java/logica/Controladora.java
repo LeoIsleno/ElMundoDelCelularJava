@@ -171,4 +171,30 @@ public class Controladora {
         controlPersis.guardarVentaProductos(venta);
     }
 
+    //Equipos a reparacion
+    public void registrarEquipo(String nombre, String numero, String descripcion, String eqEncendido, String moduloSano,
+            String SIM, String bandejaSim, String bateria, String tapa, Date fechaIngreso, Date fechaRetiro, String reparacionRealizada,
+            String formaPago, int costoRepuesto, int Total) {
+
+        Reparaciones rep = new Reparaciones();
+
+        rep.setNombre(nombre);
+        rep.setNumero(numero);
+        rep.setDescripcion(descripcion);
+        rep.setEquipoEncendido(eqEncendido);
+        rep.setModuloSano(moduloSano);
+        rep.setSIM(SIM);
+        rep.setBandejaSim(bandejaSim);
+        rep.setBateria(bateria);
+        rep.setTapa(tapa);
+        rep.setFechaIngreso(fechaIngreso);
+        rep.setFechaRetiro(fechaRetiro);
+        rep.setReparacionRealizada(reparacionRealizada);
+        rep.setFormaPago(formaPago);
+        rep.setCostoRepuesto(costoRepuesto);
+        rep.setTotal(Total);
+        
+        controlPersis.guardarReparacion(rep);
+
+    }
 }

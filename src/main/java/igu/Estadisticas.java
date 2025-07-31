@@ -378,32 +378,57 @@ public class Estadisticas extends javax.swing.JInternalFrame {
     }
 
     public static String obtenerVentasPorMes(List<VentasCelulares> ventas) {
-        Map<String, Double> ventasPorMes = new HashMap<>();
-
-        // Establecer el formato para el nombre del mes en español
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM", new Locale("es"));
+        Map<Month, Double> ventasPorMes = new HashMap<>();
 
         for (VentasCelulares venta : ventas) {
+            if (venta.getCelular() == null) {
+                continue;
+            }
+
             // Convertir la fecha de venta de Date a LocalDate
             LocalDate fecha = venta.getFechaVenta().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            String nombreMes = fecha.getMonth().getDisplayName(TextStyle.FULL, new Locale("es"));
+            Month mes = fecha.getMonth();
 
             // Convertir el precio y el costo de String a double
-            double precio = Double.parseDouble(venta.getCelular().getPrecio());
-            double costo = Double.parseDouble(venta.getCelular().getCosto());
+            double precio = parsearNumero(venta.getCelular().getPrecio());
+            double costo = parsearNumero(venta.getCelular().getCosto());
             double ganancia = precio - costo;
 
             // Sumar la ganancia al mes correspondiente
-            ventasPorMes.put(nombreMes, ventasPorMes.getOrDefault(nombreMes, 0.0) + ganancia);
+            ventasPorMes.put(mes, ventasPorMes.getOrDefault(mes, 0.0) + ganancia);
         }
 
-        // Crear una cadena con la información de las ventas por mes
+        // Ordenar por mes y construir el string de resultado
         StringBuilder resultado = new StringBuilder();
-        for (Map.Entry<String, Double> entry : ventasPorMes.entrySet()) {
-            resultado.append("Dinero en ").append(entry.getKey()).append(": $").append(entry.getValue()).append("\n");
+        ventasPorMes.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .forEach(entry -> {
+                    String nombreMes = entry.getKey().getDisplayName(TextStyle.FULL, new Locale("es"));
+                    double ganancia = entry.getValue();
+                    resultado.append("Dinero en ").append(capitalizar(nombreMes)).append(": $").append(String.format("%,.2f", ganancia)).append("\n");
+                });
 
-        }
         return resultado.toString();
+    }
+
+    private static String capitalizar(String texto) {
+        if (texto == null || texto.isEmpty()) {
+            return texto;
+        }
+        return texto.substring(0, 1).toUpperCase() + texto.substring(1);
+    }
+
+    private static double parsearNumero(String valor) {
+        if (valor == null || valor.isEmpty()) {
+            return 0.0;
+        }
+        valor = valor.replace(".", "").replace(",", ".");
+        try {
+            return Double.parseDouble(valor);
+        } catch (NumberFormatException e) {
+            System.err.println("Error al convertir número: " + valor);
+            return 0.0;
+        }
     }
 
     private boolean esDelMesActual(Date fechaVenta) {
