@@ -389,7 +389,7 @@ public class RegistrarReparaciones extends javax.swing.JInternalFrame {
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 56, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -400,7 +400,7 @@ public class RegistrarReparaciones extends javax.swing.JInternalFrame {
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Precios"));
@@ -483,21 +483,20 @@ public class RegistrarReparaciones extends javax.swing.JInternalFrame {
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(69, 69, 69)
+                        .addComponent(label_fechaRetiro))
                     .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(label_fechaRetiro)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(label_fechaRetiro)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -514,9 +513,9 @@ public class RegistrarReparaciones extends javax.swing.JInternalFrame {
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14))))
@@ -535,14 +534,14 @@ public class RegistrarReparaciones extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -566,7 +565,9 @@ public class RegistrarReparaciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_radBut_transferenciaActionPerformed
 
     private void btn_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AceptarActionPerformed
+        btn_Aceptar.setEnabled(false);
         crearInstanciaReparacion();
+        btn_Aceptar.setEnabled(true);
     }//GEN-LAST:event_btn_AceptarActionPerformed
 
     private void jCalendar1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jCalendar1PropertyChange
@@ -666,6 +667,9 @@ public class RegistrarReparaciones extends javax.swing.JInternalFrame {
         Date fechaRetiro = fechaGlRetiro;
         String reparacionRealizada = txtA_Descripcion.getText().trim();
         String formaPago = getSeleccionado(buttonGroup2);
+        int reparado = 0;
+        boolean entregado = false;
+        String observaciones = "";
 
         // Validaciones específicas
         if (nombre.isEmpty()) {
@@ -680,27 +684,27 @@ public class RegistrarReparaciones extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "El campo 'Descripción' está vacío.");
             return;
         }
-        if (eqEncendido == null) {
+        if ("-".equals(eqEncendido)) {
             JOptionPane.showMessageDialog(null, "Debés seleccionar una opción en '¿Enciende?'.");
             return;
         }
-        if (moduloSano == null) {
+        if ("-".equals(moduloSano)) {
             JOptionPane.showMessageDialog(null, "Debés seleccionar una opción en '¿Módulo sano?'.");
             return;
         }
-        if (SIM == null) {
+        if ("-".equals(SIM)) {
             JOptionPane.showMessageDialog(null, "Debés seleccionar una opción en '¿Tiene SIM?'.");
             return;
         }
-        if (bandejaSim == null) {
+        if ("-".equals(bandejaSim)) {
             JOptionPane.showMessageDialog(null, "Debés seleccionar una opción en '¿Tiene bandeja SIM?'.");
             return;
         }
-        if (bateria == null) {
+        if ("-".equals(bateria)) {
             JOptionPane.showMessageDialog(null, "Debés seleccionar una opción en '¿Tiene batería?'.");
             return;
         }
-        if (tapa == null) {
+        if ("-".equals(tapa)) {
             JOptionPane.showMessageDialog(null, "Debés seleccionar una opción en '¿Tiene tapa?'.");
             return;
         }
@@ -719,7 +723,126 @@ public class RegistrarReparaciones extends javax.swing.JInternalFrame {
             return;
         }
 
-        control.registrarEquipo(nombre, numero, descripcion, eqEncendido, moduloSano, SIM, bandejaSim, bateria, tapa, fechaIngreso, fechaRetiro, reparacionRealizada, formaPago, costoRepuesto, total);
+        control.registrarEquipo(nombre, numero, descripcion, eqEncendido, moduloSano, SIM, bandejaSim, bateria, tapa, fechaIngreso, fechaRetiro, reparacionRealizada, formaPago, costoRepuesto, entregado, reparado, observaciones, total);
+        limpiarCampos();
+        JOptionPane.showMessageDialog(null, "¡Reparacion Cargada!.");
+
+    }
+
+    private void limpiarCampos() {
+        txt_nombreCliente.setText("");
+        txt_numeroCliente.setText("");
+        txtA_Descripcion.setText("");
+        txt_costoRepuesto.setText("");
+        txt_PrecioFinal.setText("");
+
+        comb_EqEncendido.setSelectedIndex(-1);
+        comb_ModuloSano.setSelectedIndex(-1);
+        comb_Sim.setSelectedIndex(-1);
+        comb_BandejaSim.setSelectedIndex(-1);
+        comb_Bateria.setSelectedIndex(-1);
+        comb_Tapa.setSelectedIndex(-1);
+
+        buttonGroup2.clearSelection();
+
+        // Si querés resetear la fecha de retiro a null o una por defecto:
+        fechaGlRetiro = null;
+    }
+
+    public void cargarDatos(
+            int id,
+            String nombre,
+            String numero,
+            String descripcion,
+            String eqEncendido,
+            String moduloSano,
+            String SIM,
+            String bandejaSim,
+            String bateria,
+            String tapa,
+            Date fechaIngreso,
+            Date fechaRetiro,
+            String reparacionRealizada,
+            String formaPago,
+            int costoRepuesto,
+            boolean entregado,
+            int reparado,
+            String observaciones,
+            int total,
+            boolean flag
+    ) {
+
+        // Setear los valores en los campos de texto
+        txt_NroOrden.setText(String.valueOf(id));
+        txt_nombreCliente.setText(nombre);
+        txt_numeroCliente.setText(numero);
+        txtA_Descripcion.setText(descripcion);
+
+        // Combos
+        comb_EqEncendido.setSelectedItem(eqEncendido);
+        comb_ModuloSano.setSelectedItem(moduloSano);
+        comb_Sim.setSelectedItem(SIM);
+        comb_BandejaSim.setSelectedItem(bandejaSim);
+        comb_Bateria.setSelectedItem(bateria);
+        comb_Tapa.setSelectedItem(tapa);
+
+        // Fechas
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // Formato: día/mes/año
+        label_fechaRetiro.setText(sdf.format(fechaRetiro));
+
+        // Reparación realizada
+        txtA_Descripcion.setText(reparacionRealizada);
+
+        // Forma de pago
+        setSeleccionado(buttonGroup2, formaPago);
+
+        // Campos numéricos
+        txt_costoRepuesto.setText(String.valueOf(costoRepuesto));
+        txt_PrecioFinal.setText(String.valueOf(total));
+
+        if (flag) {
+            deshabilitarCampos();
+        }
+
+    }
+
+    private void setSeleccionado(ButtonGroup grupo, String valor) {
+        Enumeration<AbstractButton> botones = grupo.getElements();
+        while (botones.hasMoreElements()) {
+            AbstractButton boton = botones.nextElement();
+            if (boton.getText().equalsIgnoreCase(valor)) {
+                boton.setSelected(true);
+                break;
+            }
+        }
+    }
+
+    private void deshabilitarCampos() {
+        // 🔒 Inhabilitar todos los campos
+        txt_nombreCliente.setEditable(false);
+        txt_numeroCliente.setEditable(false);
+        txtA_Descripcion.setEditable(false);
+
+        comb_EqEncendido.setEnabled(false);
+        comb_ModuloSano.setEnabled(false);
+        comb_Sim.setEnabled(false);
+        comb_BandejaSim.setEnabled(false);
+        comb_Bateria.setEnabled(false);
+        comb_Tapa.setEnabled(false);
+        jCalendar1.setEnabled(false);
+
+        txt_costoRepuesto.setEditable(false);
+        txt_PrecioFinal.setEditable(false);
+
+        // Si tenés botones de radio
+        Enumeration<AbstractButton> botones = buttonGroup2.getElements();
+        while (botones.hasMoreElements()) {
+            botones.nextElement().setEnabled(false);
+        }
+
+        // Si tenés botón de guardar o aceptar
+        btn_Aceptar.setEnabled(false);
+        btn_Cancelar.setEnabled(false);
     }
 
 }

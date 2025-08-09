@@ -172,9 +172,7 @@ public class Controladora {
     }
 
     //Equipos a reparacion
-    public void registrarEquipo(String nombre, String numero, String descripcion, String eqEncendido, String moduloSano,
-            String SIM, String bandejaSim, String bateria, String tapa, Date fechaIngreso, Date fechaRetiro, String reparacionRealizada,
-            String formaPago, int costoRepuesto, int Total) {
+    public void registrarEquipo(String nombre, String numero, String descripcion, String eqEncendido, String moduloSano, String SIM, String bandejaSim, String bateria, String tapa, Date fechaIngreso, Date fechaRetiro, String reparacionRealizada, String formaPago, int costoRepuesto, boolean entregado, int reparado, String observaciones, int total) {
 
         Reparaciones rep = new Reparaciones();
 
@@ -192,9 +190,33 @@ public class Controladora {
         rep.setReparacionRealizada(reparacionRealizada);
         rep.setFormaPago(formaPago);
         rep.setCostoRepuesto(costoRepuesto);
-        rep.setTotal(Total);
-        
-        controlPersis.guardarReparacion(rep);
+        rep.setEntregado(entregado);
+        rep.setObservaciones(observaciones);
+        rep.setReparado(reparado);
+        rep.setTotal(total);
+        rep.setFechaRetiroReal(null);
 
+        controlPersis.guardarReparacion(rep);
     }
+
+    public List<Reparaciones> traerReparaciones() {
+        return controlPersis.traerReparaciones();
+    }
+
+    public List<Reparaciones> traerReparacionesPorNombre(String nombreCliente) {
+        return controlPersis.traerReparacionPorNombre(nombreCliente);
+    }
+
+    public Reparaciones traerReparacionesBuscado(int idrep) {
+        return controlPersis.traerReparacionBuscado(idrep);
+    }
+
+    public void EliminarReparacion(int idrep) {
+        controlPersis.eliminarReparaciones(idrep);
+    }
+
+    public void actualizarReparacionAReparada(Reparaciones rep) {
+        controlPersis.modificarReparaciones(rep);
+    }
+
 }

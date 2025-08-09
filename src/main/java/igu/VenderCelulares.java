@@ -729,7 +729,7 @@ public class VenderCelulares extends javax.swing.JInternalFrame {
                 // Mensaje de alerta: no se seleccionó ninguna fila
                 Utilidades.MostrarMensaje(itemNoSeleccionado, mensajeInfo, Alerta);
                 return false;
-            }
+            }   
         } else {
             // Mensaje de alerta: tabla vacía
             Utilidades.MostrarMensaje(vacio, mensajeInfo, Alerta);

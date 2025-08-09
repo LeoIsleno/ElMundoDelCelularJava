@@ -1,5 +1,6 @@
 package persistencia;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +20,7 @@ public class ControladoraPersistencia {
 
     ProductosJpaController productoJPA = new ProductosJpaController();
     VentaProductosJpaController ventaProductosJPA = new VentaProductosJpaController();
-    
+
     ReparacionesJpaController reparacionesJPA = new ReparacionesJpaController();
 
     //Celulares
@@ -134,9 +135,8 @@ public class ControladoraPersistencia {
     public void guardarVentaProductos(VentaProductos ventaProductos) {
         ventaProductosJPA.create(ventaProductos);
     }
-    
+
     //Reparaciones de Equipos
-    
     public void guardarReparacion(Reparaciones rep) {
         //Crear en la BD un registro de celular
         reparacionesJPA.create(rep);
@@ -153,7 +153,7 @@ public class ControladoraPersistencia {
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } 
+    }
 
     public Reparaciones traerReparacionBuscado(int id_Cel) {
         return reparacionesJPA.findReparacion(id_Cel);
@@ -166,5 +166,18 @@ public class ControladoraPersistencia {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-  
+
+    public List<Reparaciones> traerReparacionPorNombre(String nombreCliente) {
+        List<Reparaciones> lista = traerReparaciones(); // trae todas
+        List<Reparaciones> resultado = new ArrayList<>();
+
+        for (Reparaciones rep : lista) {
+            if (rep.getNombre() != null && rep.getNombre().toLowerCase().contains(nombreCliente.toLowerCase())) {
+                resultado.add(rep);
+            }
+        }
+
+        return resultado;
+    }
+
 }

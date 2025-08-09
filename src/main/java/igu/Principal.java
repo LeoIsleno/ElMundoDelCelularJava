@@ -1,5 +1,6 @@
 package igu;
 
+import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 import logica.UsuarioSingleton;
 import logica.Usuarios;
@@ -24,6 +25,7 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem2 = new javax.swing.JMenuItem();
         VentanaPrincipal = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -37,6 +39,11 @@ public class Principal extends javax.swing.JFrame {
         btn_Productos = new javax.swing.JMenuItem();
         btnMenu_Estadisticas = new javax.swing.JMenu();
         btn_estadisticasGeneral = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        btn_salir1 = new javax.swing.JMenuItem();
+        btn_salir2 = new javax.swing.JMenuItem();
+
+        jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,7 +58,7 @@ public class Principal extends javax.swing.JFrame {
         );
         VentanaPrincipalLayout.setVerticalGroup(
             VentanaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 436, Short.MAX_VALUE)
+            .addGap(0, 437, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Menu");
@@ -126,6 +133,26 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(btnMenu_Estadisticas);
 
+        jMenu3.setText("Consultar");
+
+        btn_salir1.setText("Equipos Ingresados");
+        btn_salir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_salir1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(btn_salir1);
+
+        btn_salir2.setText("Equipos Entregados");
+        btn_salir2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_salir2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(btn_salir2);
+
+        jMenuBar1.add(jMenu3);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -136,7 +163,7 @@ public class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(VentanaPrincipal)
+            .addComponent(VentanaPrincipal, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -208,7 +235,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_ProductoActionPerformed
 
     private void btn_ProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProductosActionPerformed
-       if (internalFrame == null || internalFrame.isClosed()) {
+        if (internalFrame == null || internalFrame.isClosed()) {
             // Si no hay una instancia abierta o está cerrada, crea una nueva instancia
             internalFrame = new VenderProductos();
             VentanaPrincipal.add(internalFrame);
@@ -237,6 +264,25 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_RegEquipoActionPerformed
 
+    private void btn_salir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salir1ActionPerformed
+        if (internalFrame == null || internalFrame.isClosed()) {
+            // Si no hay una instancia abierta o está cerrada, crea una nueva instancia
+            internalFrame = new ConsultarReparaciones();
+            VentanaPrincipal.add(internalFrame);
+        }
+        // Trae el InternalFrame existente al frente
+        internalFrame.setVisible(true);
+        try {
+            internalFrame.setSelected(true);
+        } catch (java.beans.PropertyVetoException e) {
+            // Manejar excepciones si es necesario
+        }
+    }//GEN-LAST:event_btn_salir1ActionPerformed
+
+    private void btn_salir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salir2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_salir2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane VentanaPrincipal;
     private javax.swing.JMenu btnMenu_Estadisticas;
@@ -247,10 +293,14 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem btn_estadisticasGeneral;
     private javax.swing.JMenu btn_registrar_equipo;
     private javax.swing.JMenuItem btn_salir;
+    private javax.swing.JMenuItem btn_salir1;
+    private javax.swing.JMenuItem btn_salir2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
 
     private void setPermision() {
@@ -268,4 +318,9 @@ public class Principal extends javax.swing.JFrame {
             btnMenu_Estadisticas.setVisible(true);
         }
     }
+
+    public JDesktopPane getVentanaPrincipal() {
+        return VentanaPrincipal;
+    }
+
 }
